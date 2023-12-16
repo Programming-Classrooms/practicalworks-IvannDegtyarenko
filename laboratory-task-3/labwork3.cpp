@@ -1,7 +1,3 @@
-#include <iostream>
-#include <exception>
-
-
 /*
 В массиве, состоящем из п целых элементов, вычислить:
 - сумму элементов массива с нечетными номерами;
@@ -10,6 +6,10 @@
 Сжать массив, удалив из него все элементы, модуль которых больше числа N.
 Освободившиеся в конце массива элементы заполнить нулями.
 */
+
+
+#include <iostream>
+#include <exception>
 
 
 bool checkStream()
@@ -42,7 +42,7 @@ int getArraySize()
 }
 
 
-void getRandomNumber(int32_t* arr, const size_t arraySize)
+void arrayFillRand(int32_t* arr, const size_t& arraySize)
 {
 	srand(time(NULL));
 	int64_t min = 0, max = 0;
@@ -70,7 +70,7 @@ void getRandomNumber(int32_t* arr, const size_t arraySize)
 }
 
 
-void getInputType(int32_t* arr, const size_t arraySize)
+void fillArrChoice(int32_t* arr, const size_t& arraySize)
 {
 	std::cout << "Choose the type of input: 1-automatically, 2-manually: ";
 	uint64_t inputType = 0;
@@ -85,7 +85,7 @@ void getInputType(int32_t* arr, const size_t arraySize)
 	}
 	switch (inputType) {
 	case 1: {
-		getRandomNumber(arr, arraySize);
+		arrayFillRand(arr, arraySize);
 		break;
 	}
 	case 2: {
@@ -99,7 +99,7 @@ void getInputType(int32_t* arr, const size_t arraySize)
 }
 
 
-void arrayOutput(int32_t* arr, const size_t arraySize)
+void arrayOutput(int32_t* arr, const size_t& arraySize)
 {
 	for (size_t i = 0; i < arraySize; ++i) {
 		std::cout << arr[i] << " ";
@@ -107,18 +107,17 @@ void arrayOutput(int32_t* arr, const size_t arraySize)
 }
 
 
-void sumOfTheElements(int32_t* arr, const size_t arraySize)
+int sumOfTheElements(int32_t* arr, const size_t& arraySize)
 {
 	int64_t sum = 0;
-	for (size_t i = 1; i < arraySize;) {
+	for (size_t i = 1; i < arraySize; i += 2) {
 		sum += arr[i];
-		i += 2;
 	}
-	std::cout << "\nThe sum of the elements of the array with odd numbers = " << sum;
+    return sum;
 }
 
 
-int firstPositive(int32_t* arr, const size_t arraySize)
+int firstPositive(int32_t* arr, const size_t& arraySize)
 {
 	int32_t firstPositiveDigit = -1;
 	for (size_t i = 0; i < arraySize; ++i) {
@@ -128,7 +127,7 @@ int firstPositive(int32_t* arr, const size_t arraySize)
 		}
 	}
 	if (firstPositiveDigit == -1) {
-		throw std::exception("The necessary positive value is missing!");
+		return -1;
 	}
 	else {
 		return firstPositiveDigit;
@@ -136,7 +135,7 @@ int firstPositive(int32_t* arr, const size_t arraySize)
 }
 
 
-int lastPositive(int32_t* arr, const size_t arraySize)
+int lastPositive(int32_t* arr, const size_t& arraySize)
 {
 	int32_t lastPositiveDigit = firstPositive(arr, arraySize);
 	for (size_t i = firstPositive(arr, arraySize); i < arraySize; ++i) {
@@ -145,7 +144,7 @@ int lastPositive(int32_t* arr, const size_t arraySize)
 		}
 	}
 	if (lastPositiveDigit == firstPositive(arr, arraySize)) {
-		throw std::exception("The second positive value is missing!");
+		return -1;
 	}
 	else {
 		return lastPositiveDigit;
@@ -153,19 +152,18 @@ int lastPositive(int32_t* arr, const size_t arraySize)
 }
 
 
-void multiplicationOfElements(int32_t* arr, const size_t arraySize)
+void elemMultiplication(int32_t firstPositiveDigit, int32_t lastPositiveDigit, int64_t& multiplication, int32_t* arr)
 {
-	int32_t firstPositiveDigit = firstPositive(arr, arraySize);
-	int32_t lastPositiveDigit = lastPositive(arr, arraySize);
-	int64_t multiplication = 1;
+	if (firstPositiveDigit == -1 || lastPositiveDigit == -1) {
+		throw std::exception("Can't provide multiplication");
+	}
 	for (size_t i = firstPositiveDigit; i <= lastPositiveDigit; ++i) {
 		multiplication *= arr[i];
 	}
-	std::cout << "\nMultiplication of elements between the first and last positive number = " << multiplication;
 }
 
 
-void arrayMinimizing(int32_t* arr, const size_t arraySize)
+void arrayMinimizing(int32_t* arr, const size_t& arraySize)
 {
 	std::cout << "\nEnter your number for minimizing rule: ";
 	int32_t userNumber;
@@ -197,12 +195,16 @@ int main()
 	int32_t arr[maxSize];
 	try {
 		uint64_t arraySize = getArraySize();
-		getInputType(arr, arraySize);
+		fillArrChoice(arr, arraySize);
 		std::cout << "Your array: ";
 		arrayOutput(arr, arraySize);
-		sumOfTheElements(arr, arraySize);
+        std::cout << "\nThe sum of the elements of the array with odd numbers = " << sumOfTheElements(arr, arraySize);
 		try {
-			multiplicationOfElements(arr, arraySize);
+			int32_t firstPositiveDigit = firstPositive(arr, arraySize);
+			int32_t lastPositiveDigit = lastPositive(arr, arraySize);
+			int64_t multiplication = 1;
+			elemMultiplication(firstPositiveDigit, lastPositiveDigit, multiplication, arr);
+			std::cout << "\nMultiplication of elements between the first and last positive number = " << multiplication;
 		}
 		catch (std::exception& error) {
 			std::cout << error.what();
