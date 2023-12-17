@@ -7,10 +7,8 @@
 Освободившиеся в конце массива элементы заполнить нулями.
 */
 
-
 #include <iostream>
 #include <exception>
-
 
 bool checkStream()
 {
@@ -21,7 +19,6 @@ bool checkStream()
 	}
 	return true;
 }
-
 
 int getArraySize()
 {
@@ -40,7 +37,6 @@ int getArraySize()
 		}
 	}
 }
-
 
 void arrayFillRand(int32_t* arr, const size_t& arraySize)
 {
@@ -68,7 +64,6 @@ void arrayFillRand(int32_t* arr, const size_t& arraySize)
 		arr[i] = rand() % (max - min + 1) + min;
 	}
 }
-
 
 void fillArrChoice(int32_t* arr, const size_t& arraySize)
 {
@@ -98,7 +93,6 @@ void fillArrChoice(int32_t* arr, const size_t& arraySize)
 	}
 }
 
-
 void arrayOutput(int32_t* arr, const size_t& arraySize)
 {
 	for (size_t i = 0; i < arraySize; ++i) {
@@ -115,7 +109,6 @@ int sumOfTheElements(int32_t* arr, const size_t& arraySize)
 	}
     return sum;
 }
-
 
 int firstPositive(int32_t* arr, const size_t& arraySize)
 {
@@ -134,7 +127,6 @@ int firstPositive(int32_t* arr, const size_t& arraySize)
 	}
 }
 
-
 int lastPositive(int32_t* arr, const size_t& arraySize)
 {
 	int32_t lastPositiveDigit = firstPositive(arr, arraySize);
@@ -151,7 +143,6 @@ int lastPositive(int32_t* arr, const size_t& arraySize)
 	}
 }
 
-
 void elemMultiplication(int32_t firstPositiveDigit, int32_t lastPositiveDigit, int64_t& multiplication, int32_t* arr)
 {
 	if (firstPositiveDigit == -1 || lastPositiveDigit == -1) {
@@ -161,7 +152,6 @@ void elemMultiplication(int32_t firstPositiveDigit, int32_t lastPositiveDigit, i
 		multiplication *= arr[i];
 	}
 }
-
 
 void arrayMinimizing(int32_t* arr, const size_t& arraySize)
 {
@@ -187,7 +177,6 @@ void arrayMinimizing(int32_t* arr, const size_t& arraySize)
 		}
 	}
 }
-
 
 int main()
 {
