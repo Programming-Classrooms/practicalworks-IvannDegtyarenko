@@ -7,11 +7,9 @@
 * матрицы.
 */
 
-
 #include <iostream>
 #include <exception>
 #include <iomanip>
-
 
 bool checkStream()
 {
@@ -27,27 +25,21 @@ int getNumber()
 {
 	int64_t number = 0;
 	std::cin >> number;
-	if (!checkStream()) {
-		throw std::exception("Error in getting number!");
+	while (!checkStream()) {
+		std::cout << "Enter a number instead of the letter: ";
+		std::cin >> number;
 	}
-	else {
-		if (number <= 0) {
-			throw std::exception("Error in getting number!");
+	while (number <= 0) {
+		std::cout << "Wrong value! Enter right: ";
+		std::cin >> number;
+		if (!checkStream()) {
+			continue;
 		}
 	}
 	return number;
 }
 
-
-void checkMatrix(const size_t columns, const size_t rows)
-{
-	if (columns != rows) {
-		throw std::exception("Error in building square matrix!");
-	}
-}
-
-
-void memory(int32_t**& mtrx, const size_t columns, const size_t rows)
+void memoryAllocation(int32_t**& mtrx, size_t columns, size_t rows)
 {
 	mtrx = new int* [rows];
 	for (size_t i = 0; i < rows; ++i) {
@@ -55,109 +47,100 @@ void memory(int32_t**& mtrx, const size_t columns, const size_t rows)
 	}
 }
 
-
-void deleteMatrix(int32_t**& mtrx, const size_t rows)
+void memoryCleaning(int32_t**& mtrx, size_t rows)
 {
 	for (size_t i = 0; i < rows; ++i) {
-		delete[]mtrx[i];
+		delete[] mtrx[i];
 	}
-	delete[]mtrx;
+	delete[] mtrx;
 }
 
-
-void randomInput(int32_t**& mtrx, const size_t columns, const size_t rows)
+void fillingWithRandomNumbers(int32_t**& mtrx, size_t columns, size_t rows, int64_t rightBoarder, int64_t leftBoarder)
 {
 	srand(time(NULL));
-	std::cout << "Enter the boundaries for finding random numbers: ";
-	int64_t min = 0;
-	std::cin >> min;
-	int64_t max = 0;
-	std::cin >> max;
-	if (!checkStream()) {
-		throw std::exception("Error in getting number!");
-	}
-	if (max == min) {
-		throw std::exception("These numbers can't be used as boundaries!");
-	}
-	if (max < min) {
-		std::swap(max, min);
-	}
 	for (size_t i = 0; i < rows; ++i) {
 		for (size_t j = 0; j < columns; ++j) {
-			mtrx[i][j] = rand() % (max - min + 1) + min;
+			mtrx[i][j] = rand() % (rightBoarder - leftBoarder + 1) + leftBoarder;
 		}
 	}
 }
 
-
-void keyboardInput(int32_t**& mtrx, const size_t columns, const size_t rows)
+void fillingManually(int32_t**& mtrx, size_t columns, size_t rows)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		std::cout << '\n';
 		for (size_t j = 0; j < columns; ++j) {
 			std::cin >> mtrx[i][j];
+			while (!checkStream()) {
+				std::cout << "Enter a number instead of the letter: ";
+				std::cin >> mtrx[i][j];
+			}
 		}
 	}
 }
 
-
-void inputChoice(int32_t**& mtrx, const size_t columns, const size_t rows)
+void inputChoice(int32_t**& mtrx, size_t columns, size_t rows)
 {
 	std::cout << "Choose the type of input: 1) Automatically  2) Manually: ";
 	int64_t inputType = getNumber();
-	if (inputType < 1 || inputType>2) {
-		throw std::exception("Wrong value!");
+	while (inputType < 1 || inputType > 2) {
+		std::cout << "Wrong choice! Enter right number: ";
+		inputType = getNumber();
 	}
 	switch (inputType) {
-	case 1: {
-		randomInput(mtrx, columns, rows);
-		break;
+		case 1: {
+			std::cout << "Enter the boundaries for finding random numbers: ";
+			int64_t leftBoarder = 0;
+			std::cin >> leftBoarder;
+			while (!checkStream()) {
+				std::cout << "Enter a number instead of the letter: ";
+				std::cin >> leftBoarder;
+			}
+			int64_t rightBoarder = 0;
+			std::cin >> rightBoarder;
+			while (!checkStream()) {
+				std::cout << "Enter a number instead of the letter: ";
+				std::cin >> rightBoarder;
+			}
+			if (rightBoarder < leftBoarder) {
+				std::swap(rightBoarder, leftBoarder);
+			}
+			fillingWithRandomNumbers(mtrx, columns, rows, rightBoarder, leftBoarder);
+			break;
 	}
-	case 2: {
-		std::cout << "Enter your own numbers: ";
-		keyboardInput(mtrx, columns, rows);
-		break;
+		case 2: {
+			std::cout << "Enter your own numbers: ";
+			fillingManually(mtrx, columns, rows);
+			break;
 	}
 	}
 }
 
-
-void matrixOutput(int32_t** mtrx, const size_t columns, const size_t rows)
+void matrixPrint(int32_t** mtrx, size_t columns, size_t rows)
 {
+	int64_t width = 5;
+	std::cout << "Do you want to change the input width (1-yes/2-no)? ";
+	int64_t choice = getNumber();
+	while (choice < 1 || choice > 2) {
+		std::cout << "Wrong choice! Enter right number: ";
+		choice = getNumber();
+	}
+	if (choice == 1) {
+		std::cout << "Enter your input width: ";
+		width = getNumber();
+	}
+	else {
+		width = 5;
+	}
 	for (size_t i = 0; i < rows; ++i) {
 		std::cout << '\n';
 		for (size_t j = 0; j < columns; ++j) {
-			std::cout << std::setw(5) << mtrx[i][j];
+			std::cout << std::setw(width) << mtrx[i][j];
 		}
 	}
 }
 
-
-void swapColumns(int32_t**& mtrx, const size_t columns, const size_t rows)
-{
-	size_t nullColumn = -1;
-	for (size_t i = 0; i < columns; ++i) {
-		if (mtrx[0][i] == 0) {
-			nullColumn = i;
-			break;
-		}
-	}
-	if (nullColumn == -1) {
-		throw std::exception("Can't end the task. Can't find the column with zero element\n");
-		
-	}
-	if (nullColumn == 0) {
-		std::cout << "Due to the position of first null element no need in changing matrix\n";
-	}
-	else {
-		for (size_t i = 0; i < rows; ++i) {
-			std::swap(mtrx[i][0], mtrx[i][nullColumn]);
-		}
-	}
-}
-
-
-void findMaxElem(int32_t** mtrx, const size_t columns, const size_t rows, int64_t& maxElement)
+void findMaxElem(int32_t** mtrx, size_t columns, size_t rows, int64_t& maxElement)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		for (size_t j = i; j < columns; ++j) {
@@ -168,32 +151,57 @@ void findMaxElem(int32_t** mtrx, const size_t columns, const size_t rows, int64_
 	}
 }
 
-
 int main()
 {
 	try {
 		std::cout << "Enter the number of rows for square matrix: ";
-		const size_t rows = getNumber();
+		size_t rows = getNumber();
 		std::cout << "Enter the number of columns for square matrix: ";
-		const size_t columns = getNumber();
-		checkMatrix(columns, rows);
+		size_t columns = getNumber();
+		while (columns != rows) {
+			std::cout << "This numbers can't be used in building square matrix! Please enter right numbers below.\n";
+			std::cout << "The number of columns: ";
+			columns = getNumber();
+			std::cout << "The number of rows: ";
+			rows = getNumber();
+		}
 		int32_t** matrix = nullptr;
-		memory(matrix, columns, rows);
+		memoryAllocation(matrix, columns, rows);
 		inputChoice(matrix, columns, rows);
-		matrixOutput(matrix, columns, rows);
+		matrixPrint(matrix, columns, rows);
 		std::cout << '\n';
 		system("pause");
 		system("cls");
-		swapColumns(matrix, columns, rows);
-		matrixOutput(matrix, columns, rows);
+		size_t nullColumn = -1;
+		for (size_t i = 0; i < columns; ++i) {
+			if (matrix[0][i] == 0) {
+				nullColumn = i;
+				break;
+			}
+		}
+		if (nullColumn == -1) {
+			memoryCleaning(matrix, rows);
+			throw std::exception("Can't end the task. Can't find the column with zero element\n");
+
+		}
+		if (nullColumn == 0) {
+			std::cout << "Due to the position of first null element no need in changing matrix\n";
+		}
+		else {
+			for (size_t i = 0; i < rows; ++i) {
+				std::swap(matrix[i][0], matrix[i][nullColumn]);
+			}
+		}
+		matrixPrint(matrix, columns, rows);
 		int64_t maxElement = matrix[0][0];
 		findMaxElem(matrix, columns, rows, maxElement);
 		std::cout << "\nMax element in the up right triangle: " << maxElement;
-		deleteMatrix(matrix, rows);
+		memoryCleaning(matrix, rows);
 	}
 	catch (std::exception& error) {
 		std::cout << error.what();
 		return -1;
+		
 	}
 	return 0;
 }
