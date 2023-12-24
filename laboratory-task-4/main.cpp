@@ -1,15 +1,17 @@
 /*
-* Вариант 2
-* В целочисленной квадратной матрице найти:
-* - в первой строке первый нулевой элемент и столбец с этим элементом
-* поменять местами с первым столбцом матрицы
-* - найти максимальный элемент верхнего правого треугольника полученной
-* матрицы.
+	Вариант 2
+	В целочисленной квадратной матрице найти:
+	- в первой строке первый нулевой элемент и столбец с этим элементом
+	поменять местами с первым столбцом матрицы
+	- найти максимальный элемент верхнего правого треугольника полученной
+	матрицы.
 */
+
 
 #include <iostream>
 #include <exception>
 #include <iomanip>
+
 
 bool checkStream()
 {
@@ -21,7 +23,7 @@ bool checkStream()
 	return true;
 }
 
-int getNumber()
+int getPositiveNumber()
 {
 	int64_t number = 0;
 	std::cin >> number;
@@ -39,7 +41,7 @@ int getNumber()
 	return number;
 }
 
-void memoryAllocation(int32_t**& mtrx, size_t columns, size_t rows)
+void memoryAllocation(int32_t**& mtrx, const size_t& columns, const size_t& rows)
 {
 	mtrx = new int* [rows];
 	for (size_t i = 0; i < rows; ++i) {
@@ -47,7 +49,7 @@ void memoryAllocation(int32_t**& mtrx, size_t columns, size_t rows)
 	}
 }
 
-void memoryCleaning(int32_t**& mtrx, size_t rows)
+void memoryCleaning(int32_t**& mtrx, const size_t& rows)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		delete[] mtrx[i];
@@ -55,7 +57,14 @@ void memoryCleaning(int32_t**& mtrx, size_t rows)
 	delete[] mtrx;
 }
 
-void fillingWithRandomNumbers(int32_t**& mtrx, size_t columns, size_t rows, int64_t rightBoarder, int64_t leftBoarder)
+void fillingWithRandomNumbers
+(
+	int32_t**& mtrx,
+	const size_t& columns,
+	const size_t& rows,
+	const int64_t& rightBoarder,
+	const int64_t& leftBoarder
+)
 {
 	srand(time(NULL));
 	for (size_t i = 0; i < rows; ++i) {
@@ -65,11 +74,12 @@ void fillingWithRandomNumbers(int32_t**& mtrx, size_t columns, size_t rows, int6
 	}
 }
 
-void fillingManually(int32_t**& mtrx, size_t columns, size_t rows)
+void fillingManually(int32_t**& mtrx, const size_t& columns, const size_t& rows)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		std::cout << '\n';
 		for (size_t j = 0; j < columns; ++j) {
+			std::cout << "Enter your number in matrix position (" << i << "," << j << "): ";
 			std::cin >> mtrx[i][j];
 			while (!checkStream()) {
 				std::cout << "Enter a number instead of the letter: ";
@@ -79,55 +89,55 @@ void fillingManually(int32_t**& mtrx, size_t columns, size_t rows)
 	}
 }
 
-void inputChoice(int32_t**& mtrx, size_t columns, size_t rows)
+void inputChoice(int32_t**& mtrx, const size_t& columns, const size_t& rows)
 {
 	std::cout << "Choose the type of input: 1) Automatically  2) Manually: ";
-	int64_t inputType = getNumber();
+	int64_t inputType = getPositiveNumber();
 	while (inputType < 1 || inputType > 2) {
 		std::cout << "Wrong choice! Enter right number: ";
-		inputType = getNumber();
+		inputType = getPositiveNumber();
 	}
 	switch (inputType) {
-		case 1: {
-			std::cout << "Enter the boundaries for finding random numbers: ";
-			int64_t leftBoarder = 0;
+	case 1: {
+		std::cout << "Enter the boundaries for finding random numbers: ";
+		int64_t leftBoarder = 0;
+		std::cin >> leftBoarder;
+		while (!checkStream()) {
+			std::cout << "Enter a number instead of the letter: ";
 			std::cin >> leftBoarder;
-			while (!checkStream()) {
-				std::cout << "Enter a number instead of the letter: ";
-				std::cin >> leftBoarder;
-			}
-			int64_t rightBoarder = 0;
+		}
+		int64_t rightBoarder = 0;
+		std::cin >> rightBoarder;
+		while (!checkStream()) {
+			std::cout << "Enter a number instead of the letter: ";
 			std::cin >> rightBoarder;
-			while (!checkStream()) {
-				std::cout << "Enter a number instead of the letter: ";
-				std::cin >> rightBoarder;
-			}
-			if (rightBoarder < leftBoarder) {
-				std::swap(rightBoarder, leftBoarder);
-			}
-			fillingWithRandomNumbers(mtrx, columns, rows, rightBoarder, leftBoarder);
-			break;
+		}
+		if (rightBoarder < leftBoarder) {
+			std::swap(rightBoarder, leftBoarder);
+		}
+		fillingWithRandomNumbers(mtrx, columns, rows, rightBoarder, leftBoarder);
+		break;
 	}
-		case 2: {
-			std::cout << "Enter your own numbers: ";
-			fillingManually(mtrx, columns, rows);
-			break;
+	case 2: {
+		std::cout << "Enter your own numbers: ";
+		fillingManually(mtrx, columns, rows);
+		break;
 	}
 	}
 }
 
-void matrixPrint(int32_t** mtrx, size_t columns, size_t rows)
+void matrixPrint(int32_t** mtrx, const size_t& columns, const size_t& rows)
 {
 	int64_t width = 5;
 	std::cout << "Do you want to change the input width (1-yes/2-no)? ";
-	int64_t choice = getNumber();
+	int64_t choice = getPositiveNumber();
 	while (choice < 1 || choice > 2) {
 		std::cout << "Wrong choice! Enter right number: ";
-		choice = getNumber();
+		choice = getPositiveNumber();
 	}
 	if (choice == 1) {
 		std::cout << "Enter your input width: ";
-		width = getNumber();
+		width = getPositiveNumber();
 	}
 	else {
 		width = 5;
@@ -140,7 +150,7 @@ void matrixPrint(int32_t** mtrx, size_t columns, size_t rows)
 	}
 }
 
-void findMaxElem(int32_t** mtrx, size_t columns, size_t rows, int64_t& maxElement)
+void findMaxElem(int32_t** mtrx, const size_t& columns, const size_t& rows, int64_t& maxElement)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		for (size_t j = i; j < columns; ++j) {
@@ -155,15 +165,15 @@ int main()
 {
 	try {
 		std::cout << "Enter the number of rows for square matrix: ";
-		size_t rows = getNumber();
+		size_t rows = getPositiveNumber();
 		std::cout << "Enter the number of columns for square matrix: ";
-		size_t columns = getNumber();
+		size_t columns = getPositiveNumber();
 		while (columns != rows) {
 			std::cout << "This numbers can't be used in building square matrix! Please enter right numbers below.\n";
 			std::cout << "The number of columns: ";
-			columns = getNumber();
+			columns = getPositiveNumber();
 			std::cout << "The number of rows: ";
-			rows = getNumber();
+			rows = getPositiveNumber();
 		}
 		int32_t** matrix = nullptr;
 		memoryAllocation(matrix, columns, rows);
@@ -201,7 +211,7 @@ int main()
 	catch (std::exception& error) {
 		std::cout << error.what();
 		return -1;
-		
+
 	}
 	return 0;
 }
