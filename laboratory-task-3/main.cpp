@@ -1,7 +1,8 @@
 /*
 	В массиве, состоящем из п целых элементов, вычислить:
 	- сумму элементов массива с нечетными номерами;
-	- произведение элементов массива, расположенных между первым и последнимположительными элементами.
+	- произведение элементов массива, расположенных между первым и последним
+	положительными элементами.
 	Сжать массив, удалив из него все элементы, модуль которых больше числа N.
 	Освободившиеся в конце массива элементы заполнить нулями.
 */
@@ -49,13 +50,13 @@ void fillArrayRand(int32_t* arr, const size_t& arraySize)
 	while (1) {
 		std::cin >> min;
 		if (checkStream()) {
-			continue;
+			break;
 		}
 	}
 	while (1) {
 		std::cin >> max;
 		if (checkStream()) {
-			continue;
+			break;
 		}
 	}
 	if (max < min) {
@@ -103,7 +104,7 @@ void fillArrChoice(int32_t* arr, const size_t& arraySize)
 	}
 }
 
-void arrayOutput(int32_t* arr, const size_t& arraySize)
+void printArray(int32_t* arr, const size_t& arraySize)
 {
 	for (size_t i = 0; i < arraySize; ++i) {
 		std::cout << arr[i] << " ";
@@ -202,13 +203,13 @@ int main()
 		uint64_t arraySize = getArraySize();
 		fillArrChoice(arr, arraySize);
 		std::cout << "Your array: ";
-		arrayOutput(arr, arraySize);
+		printArray(arr, arraySize);
 		std::cout << "\nThe sum of the elements of the array with odd numbers = " << sumOfTheElements(arr, arraySize);
 		try {
 			int32_t firstPositiveDigit = firstPositive(arr, arraySize);
 			int32_t lastPositiveDigit = lastPositive(arr, arraySize);
 			int64_t multiplication = 1;
-			elemMultiplication(firstPositiveDigit, lastPositiveDigit, multiplication, arr);
+			elemMultiplication(arr, firstPositiveDigit, lastPositiveDigit, multiplication);
 			std::cout << "\nMultiplication of elements between the first and last positive number = " << multiplication;
 		}
 		catch (std::exception& error) {
@@ -218,10 +219,10 @@ int main()
 		system("pause");
 		system("cls");
 		std::cout << "Your array before minimizing: ";
-		arrayOutput(arr, arraySize);
+		printArray(arr, arraySize);
 		arrayMinimizing(arr, arraySize);
 		std::cout << "\nYour array after minimizing: ";
-		arrayOutput(arr, arraySize);
+		printArray(arr, arraySize);
 	}
 	catch (std::exception& error) {
 		std::cout << error.what();
