@@ -1,8 +1,8 @@
 /*
-* Задание номер 2 из файла "Лаб 5 Подпрограммы"
-* Значения будут вычисляться по формуле левых прямоугольников
-* и по формуле параболических трапеций (по формуле Симпсона)
-* Третий интеграл
+	Задание номер 2 из файла "Лаб 5 Подпрограммы"
+	Значения будут вычисляться по формуле левых прямоугольников
+	и по формуле параболических трапеций (по формуле Симпсона)
+	Третий интеграл
 */
 
 
@@ -21,12 +21,10 @@ bool checkStream()
 	return true;
 }
 
-
 double thirdIntegral(double x)
 {
 	return 1 / (x * log(x) * log(x));
 }
-
 
 double getDoubleValue()
 {
@@ -38,7 +36,6 @@ double getDoubleValue()
 	}
 	return number;
 }
-
 
 double leftRectanglesMethod(double lb, double ub, double epsilon)
 {
@@ -60,7 +57,6 @@ double leftRectanglesMethod(double lb, double ub, double epsilon)
 	return integral2;
 }
 
-
 double integralSummand(uint64_t splitSegments, double lb, double ub)
 {
 	double step = (ub - lb) / splitSegments;
@@ -78,7 +74,6 @@ double integralSummand(uint64_t splitSegments, double lb, double ub)
 	return result;
 }
 
-
 double parabolicTrapezoidMethod(double lb, double ub, double epsilon)
 {
 	uint64_t splitSegments = 4;
@@ -93,7 +88,6 @@ double parabolicTrapezoidMethod(double lb, double ub, double epsilon)
 	}
 	return integral2;
 }
-
 
 int main()
 {

@@ -1,8 +1,8 @@
 /*
-* Задание номер 2 из файла "Лаб 5 Подпрограммы"
-* Значения будут вычисляться по формуле левых прямоугольников
-* и по формуле параболических трапеций (по формуле Симпсона)
-* Первый интеграл
+	Задание номер 2 из файла "Лаб 5 Подпрограммы"
+	Значения будут вычисляться по формуле левых прямоугольников
+	и по формуле параболических трапеций (по формуле Симпсона)
+	Второй интеграл
 */
 
 
@@ -21,12 +21,10 @@ bool checkStream()
 	return true;
 }
 
-
-double firstIntegral(double x)
+double secondIntegral(double x)
 {
-	return x * sqrt(1 + x);
+	return 1 / sqrt(3 + 2 * cos(x));
 }
-
 
 double getDoubleValue()
 {
@@ -39,14 +37,13 @@ double getDoubleValue()
 	return number;
 }
 
-
 double leftRectanglesMethod(double lb, double ub, double epsilon)
 {
 	uint64_t splitSegments = 8;
 	double jump = 0.0;
 	double x = 0.0;
 	double integral1 = 0.0;
-	double integral2 = firstIntegral(ub) * (ub - lb);
+	double integral2 = secondIntegral(ub) * (ub - lb);
 	while (fabs(integral1 - integral2) >= epsilon) {
 		integral1 = integral2;
 		integral2 = 0.0;
@@ -54,12 +51,11 @@ double leftRectanglesMethod(double lb, double ub, double epsilon)
 		jump = (ub - lb) / splitSegments;
 		for (size_t step = 1; step <= splitSegments; ++step) {
 			x = lb + (step - 1) * jump;
-			integral2 += jump * firstIntegral(x);
+			integral2 += jump * secondIntegral(x);
 		}
 	}
 	return integral2;
 }
-
 
 double integralSummand(uint64_t splitSegments, double lb, double ub)
 {
@@ -68,16 +64,15 @@ double integralSummand(uint64_t splitSegments, double lb, double ub)
 	double secondSummand = 0;
 	for (uint64_t i = 1; i < splitSegments; ++i) {
 		if ((i % 2) == 0) {
-			firstSummand += (2 * firstIntegral(lb + i * step));
+			firstSummand += (2 * secondIntegral(lb + i * step));
 		}
 		else {
-			secondSummand += (4 * firstIntegral(lb + i * step));
+			secondSummand += (4 * secondIntegral(lb + i * step));
 		}
 	}
-	double result = step / 3 * ((firstSummand)+(secondSummand)+firstIntegral(splitSegments * step));
+	double result = step / 3 * ((firstSummand)+(secondSummand)+secondIntegral(splitSegments * step));
 	return result;
 }
-
 
 double parabolicTrapezoidMethod(double lb, double ub, double epsilon)
 {
@@ -93,7 +88,6 @@ double parabolicTrapezoidMethod(double lb, double ub, double epsilon)
 	}
 	return integral2;
 }
-
 
 int main()
 {
