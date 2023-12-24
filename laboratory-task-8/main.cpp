@@ -1,12 +1,15 @@
-/*Строка состоит из слов, разделенных одним или несколькими
-пробелами. Среди слов, состоящих только из цифр, найти слово, найти
-максимальное и поставить его в начало строки. Если таких слов больше
-одного, взять предпоследнее из них*/
+/*
+	Строка состоит из слов, разделенных одним или несколькими
+	пробелами. Среди слов, состоящих только из цифр, найти слово, найти
+	максимальное и поставить его в начало строки. Если таких слов больше
+	одного, взять предпоследнее из них
+*/
 
 #include <iostream>
 #include <string>
 #include <cstring>
 #include <exception>
+
 
 bool isOnlyNumbers(std::string number)
 {
@@ -19,7 +22,7 @@ bool isOnlyNumbers(std::string number)
 	return true;
 }
 
-bool isNextSameLength(std::string userLine, size_t beginIndex, size_t endIndex, size_t maxLength) 
+bool isNextSameLength(std::string userLine, size_t beginIndex, size_t endIndex, size_t maxLength)
 {
 	endIndex = userLine.find_first_of(" ", beginIndex);
 	if (endIndex == std::string::npos) {
@@ -83,7 +86,7 @@ int main()
 {
 	try {
 		std::cout << "Enter your line: ";
-		std::string userLine;
+		std::string userLine = "";
 		std::getline(std::cin, userLine);
 		if (userLine.length() == 0) {
 			throw std::exception("Entered line is empty");
