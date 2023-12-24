@@ -1,15 +1,22 @@
-/*Строка состоит из слов. За один просмотр символов строки найти все
-самые длинные слова и занести их в новую строку. Слова в новой строке
-должны разделяться точкой с запятой и одним пробелом*/
+/*
+	Строка состоит из слов. За один просмотр символов строки найти все
+	самые длинные слова и занести их в новую строку. 
+	Слова в новой строке должны разделяться точкой с запятой и одним пробелом
+*/
+
 
 #define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <exception>
 #include <cstring>
 
+
 bool isStringFull(char* string)
 {
 	bool isFull = true;
+	if (strlen(string) == 0) {
+		return false;
+	}
 	for (size_t i = 0; i < strlen(string); ++i) {
 		if (isalnum(string[i])) {
 			return true;
@@ -33,7 +40,7 @@ bool checkStream()
 	return true;
 }
 
-int getNumber()
+int getPositiveNumber()
 {
 	int64_t number = 0;
 	std::cin >> number;
@@ -83,7 +90,7 @@ void wordsToNewString(char* string, char* separators, char* newString)
 
 void getSeparators(char* separators, const size_t maxSize)
 {
-	std::cout << "Enter your own separators: ";
+	std::cout << "\nEnter your own separators: ";
 	std::cin.getline(separators, 300);
 	for (size_t i = 0; i < strlen(separators); ++i) {
 		if (isalnum(separators[i])) {
@@ -99,11 +106,11 @@ int main()
 		std::cout << "Enter your string: ";
 		char userString[maxSize];
 		std::cin.getline(userString, 300);
-		char string[maxSize];
-		strcpy(string, userString);
 		if (!isStringFull(userString)) {
 			throw std::exception("Your string is empty or contains symbols of incorrect input");
 		}
+		char string[maxSize];
+		strcpy(string, userString);
 		char separators[maxSize];
 		getSeparators(separators, maxSize);
 		char newString[maxSize] = "";
