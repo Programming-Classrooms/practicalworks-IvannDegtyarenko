@@ -43,9 +43,9 @@ int getPositiveNumber()
 
 void memoryAllocation(int32_t**& mtrx, const size_t& columns, const size_t& rows)
 {
-	mtrx = new int* [rows];
+	mtrx = new int32_t* [rows];
 	for (size_t i = 0; i < rows; ++i) {
-		mtrx[i] = new int[columns];
+		mtrx[i] = new int32_t[columns];
 	}
 }
 
