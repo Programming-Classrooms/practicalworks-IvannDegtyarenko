@@ -31,19 +31,19 @@ void checkFile(std::ifstream& file)
 	}
 }
 
-bool compareChar(char& c1, char& c2)
+bool compareChar(char& firstChar, char& secondChar)
 {
-	if (c1 == c2)
+	if (firstChar == secondChar)
 		return true;
-	else if (std::toupper(c1) == std::toupper(c2))
+	else if (std::toupper(firstChar) == std::toupper(secondChar))
 		return true;
 	return false;
 }
 
-bool StringCompare(std::string& str1, std::string& str2)
+bool StringCompare(std::string& firstString, std::string& secondString)
 {
-	return ((str1.size() == str2.size()) &&
-		std::equal(str1.begin(), str1.end(), str2.begin(), &compareChar));
+	return ((firstString.size() == secondString.size()) &&
+		std::equal(firstString.begin(), firstString.end(), secondString.begin(), &compareChar));
 }
 
 void checkFrequency(std::ifstream& file, std::string word, size_t& frequency)
