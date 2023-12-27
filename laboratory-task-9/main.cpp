@@ -40,7 +40,7 @@ bool compareChar(char& firstChar, char& secondChar)
 	return false;
 }
 
-bool StringCompare(std::string& firstString, std::string& secondString)
+bool stringCompare(std::string& firstString, std::string& secondString)
 {
 	return ((firstString.size() == secondString.size()) &&
 		std::equal(firstString.begin(), firstString.end(), secondString.begin(), &compareChar));
@@ -51,7 +51,7 @@ void checkFrequency(std::ifstream& file, std::string word, size_t& frequency)
 	std::string tempWord;
 	file.seekg(0);
 	while (file >> tempWord) {
-		bool result = StringCompare(tempWord, word);
+		bool result = stringCompare(tempWord, word);
 		if (result) {
 			++frequency;
 		}
