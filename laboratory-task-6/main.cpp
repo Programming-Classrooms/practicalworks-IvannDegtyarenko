@@ -48,10 +48,12 @@ int64_t getArraySize()
 	std::cout << "Enter the size of an array: ";
 	int64_t arraySize = 0;
 	std::cin >> arraySize;
+
 	while (!checkStream()) {
 		std::cout << "Enter a number instead of the letter: ";
 		std::cin >> arraySize;
 	}
+
 	while (arraySize <= 0) {
 		std::cout << "Wrong input value! Enter right: ";
 		std::cin >> arraySize;
@@ -135,10 +137,12 @@ void fillArrWithRandNumbers(T* arr, const size_t& arraySize)
 	std::cout << "Enter left boarder then enter right boarder: ";
 	int64_t leftBoarder = 0;
 	std::cin >> leftBoarder;
+
 	while (!checkStream()) {
 		std::cout << "Enter a number instead of the letter: ";
 		std::cin >> leftBoarder;
 	}
+
 	int64_t rightBoarder = 0;
 	std::cin >> rightBoarder;
 	while (!checkStream()) {
@@ -148,6 +152,7 @@ void fillArrWithRandNumbers(T* arr, const size_t& arraySize)
 	if (leftBoarder > rightBoarder) {
 		std::swap(leftBoarder, rightBoarder);
 	}
+
 	for (size_t i = 0; i < arraySize; ++i) {
 		arr[i] = rand() % (rightBoarder - leftBoarder + 1) + leftBoarder;
 	}
@@ -160,6 +165,7 @@ void fillArrWithRandNumbers<double>(double* arr, const size_t& arraySize)
 	std::cout << "Enter left boarder then enter right boarder: ";
 	double leftBoarder = 0.0;
 	std::cin >> leftBoarder;
+
 	while (!checkStream()) {
 		std::cout << "Enter a number instead of the letter: ";
 		std::cin >> leftBoarder;
@@ -173,6 +179,7 @@ void fillArrWithRandNumbers<double>(double* arr, const size_t& arraySize)
 	if (leftBoarder > rightBoarder) {
 		std::swap(leftBoarder, rightBoarder);
 	}
+
 	for (size_t i = 0; i < arraySize; ++i) {
 		arr[i] = static_cast<double>(rand()) / RAND_MAX * (rightBoarder - leftBoarder) + leftBoarder;
 	}
@@ -196,6 +203,7 @@ void fillArrWithRandNumbers<char>(char* arr, const size_t& arraySize)
 			continue;
 		}
 	}
+
 	int64_t rightBoarder = 0;
 	std::cin >> rightBoarder;
 	while (!checkStream()) {
@@ -209,9 +217,11 @@ void fillArrWithRandNumbers<char>(char* arr, const size_t& arraySize)
 			continue;
 		}
 	}
+
 	if (leftBoarder > rightBoarder) {
 		std::swap(leftBoarder, rightBoarder);
 	}
+
 	for (size_t i = 0; i < arraySize; ++i) {
 		arr[i] = static_cast<char>(rand() % (rightBoarder - leftBoarder + 1) + leftBoarder);
 	}
@@ -310,6 +320,7 @@ int main()
 				continue;
 			}
 		}
+
 		switch (userChoice) {
 			case 1: {
 				std::ofstream fileOut("outputFile.txt", std::ios::trunc);
@@ -318,25 +329,34 @@ int main()
 					throw std::exception("File is not opened.\n");
 				}
 				fileOut.close();
+
 				std::cout << "Array: Integer. ";
 				size_t integerArraySize = getArraySize();
 				int32_t* integerArray = new int32_t[integerArraySize];
+
 				fillArrayManually(integerArray, integerArraySize);
 				selectionSort(integerArray, integerArraySize);
+
 				printArrayToFile(integerArray, integerArraySize);
 				delete[] integerArray;
+
 				std::cout << "Array: Double. ";
 				size_t doubleArraySize = getArraySize();
 				double* doubleArray = new double[doubleArraySize];
+
 				fillArrayManually(doubleArray, doubleArraySize);
 				selectionSort(doubleArray, doubleArraySize);
+
 				printArrayToFile(doubleArray, doubleArraySize);
 				delete[] doubleArray;
+
 				std::cout << "Array: Char. ";
 				size_t charArraySize = getArraySize();
 				char* charArray = new char[charArraySize];
+
 				fillArrayManually(charArray, charArraySize);
 				selectionSort(charArray, charArraySize);
+
 				printArrayToFile(charArray, charArraySize);
 				delete[] charArray;
 				break;
@@ -348,25 +368,34 @@ int main()
 					throw std::exception("File is not opened.\n");
 				}
 				fileOut.close();
+
 				std::cout << "Array: Integer. ";
 				size_t integerArraySize = getArraySize();
 				int32_t* integerArray = new int32_t[integerArraySize];
+
 				fillArrWithRandNumbers(integerArray, integerArraySize);
 				selectionSort(integerArray, integerArraySize);
+
 				printArrayToFile(integerArray, integerArraySize);
 				delete[] integerArray;
+
 				std::cout << "Array: Double. ";
 				size_t doubleArraySize = getArraySize();
 				double* doubleArray = new double[doubleArraySize];
+
 				fillArrWithRandNumbers(doubleArray, doubleArraySize);
 				selectionSort(doubleArray, doubleArraySize);
+
 				printArrayToFile(doubleArray, doubleArraySize);
 				delete[] doubleArray;
+
 				std::cout << "Array: Char. ";
 				size_t charArraySize = getArraySize();
 				char* charArray = new char[charArraySize];
+
 				fillArrWithRandNumbers(charArray, charArraySize);
 				selectionSort(charArray, charArraySize);
+
 				printArrayToFile(charArray, charArraySize);
 				delete[] charArray;
 				break;
@@ -375,24 +404,32 @@ int main()
 				std::cout << "Array: Integer. ";
 				size_t integerArraySize = getArraySize();
 				int32_t* integerArray = new int32_t[integerArraySize];
+
 				readArrayFromFile(integerArray, integerArraySize);
 				selectionSort(integerArray, integerArraySize);
+
 				std::cout << "Sorted integer array: ";
 				printArray(integerArray, integerArraySize);
 				delete[] integerArray;
+
 				std::cout << "\nArray: Double. ";
 				size_t doubleArraySize = getArraySize();
 				double* doubleArray = new double[doubleArraySize];
+
 				readArrayFromFile(doubleArray, doubleArraySize);
 				selectionSort(doubleArray, doubleArraySize);
+
 				std::cout << "Sorted double array: ";
 				printArray(doubleArray, doubleArraySize);
 				delete[] doubleArray;
+
 				std::cout << "\nArray: Char. ";
 				size_t charArraySize = getArraySize();
 				char* charArray = new char[charArraySize];
+
 				readArrayFromFile(charArray, charArraySize);
 				selectionSort(charArray, charArraySize);
+
 				std::cout << "Sorted char array: ";
 				printArray(charArray, charArraySize);
 				delete[] charArray;
