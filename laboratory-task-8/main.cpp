@@ -11,6 +11,7 @@
 #include <cstring>
 #include <exception>
 
+
 bool isOnlyDigits(std::string number)
 {
 	size_t length = number.length();
