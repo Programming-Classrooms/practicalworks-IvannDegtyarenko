@@ -1,7 +1,7 @@
 /*
 	Строка состоит из слов. За один просмотр символов строки найти все
-	самые длинные слова и занести их в новую строку. 
-	Слова в новой строке должны разделяться точкой с запятой и одним пробелом
+	самые длинные слова и занести их в новую строку. Слова в новой строке
+	должны разделяться точкой с запятой и одним пробелом
 */
 
 
@@ -58,29 +58,23 @@ int getPositiveNumber()
 	return number;
 }
 
-int findMaxWordLength(char* string, char* separators)
-{
-	size_t maxLength = 0;
-	size_t currentLength = 0;
-	char* word = strtok(string, separators);
-	while (word != NULL) {
-		currentLength = strlen(word);
-		if (currentLength > maxLength) {
-			maxLength = currentLength;
-		}
-		word = strtok(NULL, separators);
-	}
-	return maxLength;
-}
-
-void wordsToNewString(char* string, char* separators, char* newString)
+void maxWordsToNewString(char* string, char* separators, char* newString)
 {
 	char workString[300];
 	strcpy(workString, string);
-	size_t maxWordLength = findMaxWordLength(workString, separators);
-	char* word = strtok(string, separators);
+	size_t maxLength = 0;
+	size_t currentLength = 0;
+	char* maxWord = strtok(string, separators);
+	while (maxWord != NULL) {
+		currentLength = strlen(maxWord);
+		if (currentLength > maxLength) {
+			maxLength = currentLength;
+		}
+		maxWord = strtok(NULL, separators);
+	}
+	char* word = strtok(workString, separators);
 	while (word != NULL) {
-		if (strlen(word) == maxWordLength) {
+		if (strlen(word) == maxLength) {
 			strcat(newString, word);
 			strcat(newString, "; ");
 		}
@@ -114,7 +108,7 @@ int main()
 		char separators[maxSize];
 		getSeparators(separators, maxSize);
 		char newString[maxSize] = "";
-		wordsToNewString(userString, separators, newString);
+		maxWordsToNewString(userString, separators, newString);
 		system("cls");
 		std::cout << "Your entered line: " << string;
 		std::cout << "\nString that contains only words with max length: " << newString;
