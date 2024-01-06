@@ -5,13 +5,13 @@
 	одного, взять предпоследнее из них
 */
 
+
 #include <iostream>
 #include <string>
 #include <cstring>
 #include <exception>
 
-
-bool isOnlyNumbers(std::string number)
+bool isOnlyDigits(std::string number)
 {
 	size_t length = number.length();
 	for (size_t i = 0; i < length; ++i) {
@@ -22,14 +22,14 @@ bool isOnlyNumbers(std::string number)
 	return true;
 }
 
-bool isNextSameLength(std::string userLine, size_t beginIndex, size_t endIndex, size_t maxLength)
+bool isNextWordHasSameLen(std::string userLine, size_t beginIndex, size_t endIndex, size_t maxLength) 
 {
 	endIndex = userLine.find_first_of(" ", beginIndex);
 	if (endIndex == std::string::npos) {
 		return false;
 	}
 	std::string number = userLine.substr(beginIndex, (endIndex - beginIndex));
-	if (isOnlyNumbers(number)) {
+	if (isOnlyDigits(number)) {
 		size_t currentLength = number.length();
 		if (currentLength == maxLength) {
 			return true;
@@ -41,7 +41,7 @@ bool isNextSameLength(std::string userLine, size_t beginIndex, size_t endIndex, 
 	beginIndex = userLine.find_first_not_of(" ", endIndex);
 }
 
-void transformString(std::string userLine, std::string& stringNew)
+void putWordWithMaxLenAtBeg(std::string userLine, std::string& stringNew)
 {
 	size_t beginIndex = userLine.find_first_not_of(" ");
 	size_t endIndex = 0;
@@ -49,13 +49,14 @@ void transformString(std::string userLine, std::string& stringNew)
 	size_t beginPosition = 0;
 	size_t endPosition = 0;
 	size_t repeatCounter = 1;
+
 	while (endIndex < userLine.length()) {
 		endIndex = userLine.find_first_of(" ", beginIndex);
 		if (endIndex == std::string::npos) {
 			endIndex = userLine.length();
 		}
 		std::string number = userLine.substr(beginIndex, (endIndex - beginIndex));
-		if (isOnlyNumbers(number)) {
+		if (isOnlyDigits(number)) {
 			size_t currentLength = number.length();
 			if (currentLength > maxLength) {
 				maxLength = currentLength;
@@ -64,7 +65,7 @@ void transformString(std::string userLine, std::string& stringNew)
 			}
 			else {
 				if (currentLength == maxLength) {
-					if (isNextSameLength(userLine, beginIndex, endIndex, maxLength)) {
+					if (isNextWordHasSameLen(userLine, beginIndex, endIndex, maxLength)) {
 						beginPosition = beginIndex;
 						endPosition = endIndex;
 					}
@@ -73,9 +74,11 @@ void transformString(std::string userLine, std::string& stringNew)
 		}
 		beginIndex = userLine.find_first_not_of(" ", endIndex);
 	}
+
 	if (maxLength == 0) {
-		throw std::exception("Can't find only numbers in the entered line");
+		throw std::exception("Can't find numbers in the entered line");
 	}
+
 	stringNew = userLine.substr(beginPosition, (endPosition - beginPosition));
 	userLine.erase(beginPosition, (endPosition - beginPosition));
 	stringNew += " ";
@@ -86,13 +89,13 @@ int main()
 {
 	try {
 		std::cout << "Enter your line: ";
-		std::string userLine = "";
+		std::string userLine;
 		std::getline(std::cin, userLine);
 		if (userLine.length() == 0) {
 			throw std::exception("Entered line is empty");
 		}
 		std::string stringNew;
-		transformString(userLine, stringNew);
+		putWordWithMaxLenAtBeg(userLine, stringNew);
 		std::cout << stringNew;
 	}
 	catch (std::exception& error) {
