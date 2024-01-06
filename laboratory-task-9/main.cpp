@@ -1,9 +1,9 @@
 /*
-	Строки текстового файла input.txt состоят из слов, 
-	разделенных одним  или несколькими пробелами. 
-	Перед первым, а также после последнего слова строки пробелы могут отсутствовать. 
-	Требуется определить слово, 
-	которое чаще всего встречается в файле. 
+	Строки текстового файла input.txt состоят из слов,
+	разделенных одним  или несколькими пробелами.
+	Перед первым, а также после последнего слова строки пробелы могут отсутствовать.
+	Требуется определить слово,
+	которое чаще всего встречается в файле.
 	Результат вывести на консоль в форме, удобной для чтения
 */
 
@@ -31,19 +31,19 @@ void checkFile(std::ifstream& file)
 	}
 }
 
-bool compareChar(char& firstChar, char& secondChar)
+bool stringCompare(const std::string& firstString, const std::string& secondString)
 {
-	if (firstChar == secondChar)
-		return true;
-	else if (std::toupper(firstChar) == std::toupper(secondChar))
-		return true;
-	return false;
-}
+	if (firstString.length() != secondString.length()) {
+		return false;
+	}
 
-bool stringCompare(std::string& firstString, std::string& secondString)
-{
-	return ((firstString.size() == secondString.size()) &&
-		std::equal(firstString.begin(), firstString.end(), secondString.begin(), &compareChar));
+	size_t bothWordsLength = firstString.length();
+	for (size_t i = 0; i < bothWordsLength; ++i) {
+		if (std::tolower(firstString[i]) != std::tolower(secondString[i])) {
+			return false;
+		}
+	}
+	return true;
 }
 
 void checkFrequency(std::ifstream& file, std::string word, size_t& frequency)
@@ -51,8 +51,7 @@ void checkFrequency(std::ifstream& file, std::string word, size_t& frequency)
 	std::string tempWord;
 	file.seekg(0);
 	while (file >> tempWord) {
-		bool result = stringCompare(tempWord, word);
-		if (result) {
+		if (stringCompare(tempWord, word)) {
 			++frequency;
 		}
 	}
@@ -65,6 +64,7 @@ std::string mostFrequentWord(std::ifstream& file)
 	std::string mostFreqWord = "";
 	size_t startPosition = 0;
 	std::string word = "";
+
 	while (file >> word) {
 		startPosition = file.tellg();
 		checkFrequency(file, word, currentFreq);
@@ -77,7 +77,7 @@ std::string mostFrequentWord(std::ifstream& file)
 			currentFreq = 0;
 		}
 		file.close();
-		file.open("input.txt");
+		file.open("in.txt");
 		file.seekg(startPosition);
 	}
 	return mostFreqWord;
@@ -86,7 +86,7 @@ std::string mostFrequentWord(std::ifstream& file)
 int main()
 {
 	try {
-		std::ifstream fileIn("input.txt");
+		std::ifstream fileIn("in.txt");
 		checkFile(fileIn);
 		std::cout << "Most frequent word (or number) is " << mostFrequentWord(fileIn);
 		fileIn.close();
