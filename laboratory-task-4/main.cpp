@@ -23,6 +23,11 @@ bool checkStream()
 	return true;
 }
 
+int getRandomNumber(const int64_t& leftBound, const int64_t& rightBound)
+{
+	return (rand() % (rightBound - leftBound + 1) + leftBound);
+}
+
 int getPositiveNumber()
 {
 	int64_t number = 0;
@@ -41,15 +46,15 @@ int getPositiveNumber()
 	return number;
 }
 
-void memoryAllocation(int32_t**& mtrx, const size_t& columns, const size_t& rows)
+void mtrxMemoryAllocation(int32_t**& mtrx, const size_t& rows, const size_t& columns)
 {
-	mtrx = new int32_t* [rows];
+	mtrx = new int* [rows];
 	for (size_t i = 0; i < rows; ++i) {
-		mtrx[i] = new int32_t[columns];
+		mtrx[i] = new int[columns];
 	}
 }
 
-void memoryCleaning(int32_t**& mtrx, const size_t& rows)
+void mtrxMemoryCleaning(int32_t**& mtrx, const size_t& rows)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		delete[] mtrx[i];
@@ -57,24 +62,23 @@ void memoryCleaning(int32_t**& mtrx, const size_t& rows)
 	delete[] mtrx;
 }
 
-void fillingWithRandomNumbers
+void fillMtrxWithRandomNumbers
 (
-	int32_t**& mtrx,
-	const size_t& columns,
+	int32_t** mtrx,
 	const size_t& rows,
+	const size_t& columns,
 	const int64_t& rightBoarder,
 	const int64_t& leftBoarder
 )
 {
-	srand(time(NULL));
 	for (size_t i = 0; i < rows; ++i) {
 		for (size_t j = 0; j < columns; ++j) {
-			mtrx[i][j] = rand() % (rightBoarder - leftBoarder + 1) + leftBoarder;
+			mtrx[i][j] = getRandomNumber(leftBoarder, rightBoarder);
 		}
 	}
 }
 
-void fillingManually(int32_t**& mtrx, const size_t& columns, const size_t& rows)
+void fillMtrxManually(int32_t** mtrx, const size_t& rows, const size_t& columns)
 {
 	for (size_t i = 0; i < rows; ++i) {
 		std::cout << '\n';
@@ -89,14 +93,19 @@ void fillingManually(int32_t**& mtrx, const size_t& columns, const size_t& rows)
 	}
 }
 
-void inputChoice(int32_t**& mtrx, const size_t& columns, const size_t& rows)
+uint32_t getInputType()
 {
 	std::cout << "Choose the type of input: 1) Automatically  2) Manually: ";
-	int64_t inputType = getPositiveNumber();
+	uint32_t inputType = getPositiveNumber();
 	while (inputType < 1 || inputType > 2) {
 		std::cout << "Wrong choice! Enter right number: ";
 		inputType = getPositiveNumber();
 	}
+	return inputType;
+}
+
+void switchInputType(int32_t** mtrx, const size_t& rows, const size_t& columns, const uint32_t& inputType)
+{
 	switch (inputType) {
 	case 1: {
 		std::cout << "Enter the boundaries for finding random numbers: ";
@@ -115,33 +124,25 @@ void inputChoice(int32_t**& mtrx, const size_t& columns, const size_t& rows)
 		if (rightBoarder < leftBoarder) {
 			std::swap(rightBoarder, leftBoarder);
 		}
-		fillingWithRandomNumbers(mtrx, columns, rows, rightBoarder, leftBoarder);
+		fillMtrxWithRandomNumbers(mtrx, columns, rows, rightBoarder, leftBoarder);
 		break;
 	}
 	case 2: {
 		std::cout << "Enter your own numbers: ";
-		fillingManually(mtrx, columns, rows);
+		fillMtrxManually(mtrx, columns, rows);
 		break;
 	}
 	}
 }
 
-void matrixPrint(int32_t** mtrx, const size_t& columns, const size_t& rows)
+void fillMtrxChoice(int32_t** mtrx, const size_t& rows, const size_t& columns)
 {
-	int64_t width = 5;
-	std::cout << "Do you want to change the input width (1-yes/2-no)? ";
-	int64_t choice = getPositiveNumber();
-	while (choice < 1 || choice > 2) {
-		std::cout << "Wrong choice! Enter right number: ";
-		choice = getPositiveNumber();
-	}
-	if (choice == 1) {
-		std::cout << "Enter your input width: ";
-		width = getPositiveNumber();
-	}
-	else {
-		width = 5;
-	}
+	uint32_t inputType = getInputType();
+	switchInputType(mtrx, rows, columns, inputType);
+}
+
+void matrixPrint(int32_t** mtrx, const size_t& rows, const size_t& columns, const int32_t& width)
+{
 	for (size_t i = 0; i < rows; ++i) {
 		std::cout << '\n';
 		for (size_t j = 0; j < columns; ++j) {
@@ -150,8 +151,9 @@ void matrixPrint(int32_t** mtrx, const size_t& columns, const size_t& rows)
 	}
 }
 
-void findMaxElem(int32_t** mtrx, const size_t& columns, const size_t& rows, int64_t& maxElement)
+int32_t getMaxElem(int32_t** mtrx, const size_t& rows, const size_t& columns)
 {
+	int32_t maxElement = mtrx[0][0];
 	for (size_t i = 0; i < rows; ++i) {
 		for (size_t j = i; j < columns; ++j) {
 			if (mtrx[i][j] > maxElement) {
@@ -159,15 +161,19 @@ void findMaxElem(int32_t** mtrx, const size_t& columns, const size_t& rows, int6
 			}
 		}
 	}
+	return maxElement;
 }
 
 int main()
 {
+	srand(time(NULL));
 	try {
+		int32_t width = 5;
 		std::cout << "Enter the number of rows for square matrix: ";
 		size_t rows = getPositiveNumber();
 		std::cout << "Enter the number of columns for square matrix: ";
 		size_t columns = getPositiveNumber();
+
 		while (columns != rows) {
 			std::cout << "This numbers can't be used in building square matrix! Please enter right numbers below.\n";
 			std::cout << "The number of columns: ";
@@ -175,13 +181,13 @@ int main()
 			std::cout << "The number of rows: ";
 			rows = getPositiveNumber();
 		}
+
 		int32_t** matrix = nullptr;
-		memoryAllocation(matrix, columns, rows);
-		inputChoice(matrix, columns, rows);
-		matrixPrint(matrix, columns, rows);
+		mtrxMemoryAllocation(matrix, rows, columns);
+		fillMtrxChoice(matrix, rows, columns);
+		matrixPrint(matrix, rows, columns, width);
 		std::cout << '\n';
-		system("pause");
-		system("cls");
+
 		size_t nullColumn = -1;
 		for (size_t i = 0; i < columns; ++i) {
 			if (matrix[0][i] == 0) {
@@ -189,8 +195,9 @@ int main()
 				break;
 			}
 		}
+
 		if (nullColumn == -1) {
-			memoryCleaning(matrix, rows);
+			mtrxMemoryCleaning(matrix, rows);
 			throw std::exception("Can't end the task. Can't find the column with zero element\n");
 
 		}
@@ -202,14 +209,13 @@ int main()
 				std::swap(matrix[i][0], matrix[i][nullColumn]);
 			}
 		}
-		matrixPrint(matrix, columns, rows);
-		int64_t maxElement = matrix[0][0];
-		findMaxElem(matrix, columns, rows, maxElement);
-		std::cout << "\nMax element in the up right triangle: " << maxElement;
-		memoryCleaning(matrix, rows);
+
+		matrixPrint(matrix, rows, columns, width);
+		std::cout << "\nMax element in the up right triangle: " << getMaxElem(matrix, rows, columns);
+		mtrxMemoryCleaning(matrix, rows);
 	}
 	catch (std::exception& error) {
-		std::cout << error.what();
+		std::cerr << error.what();
 		return -1;
 
 	}
