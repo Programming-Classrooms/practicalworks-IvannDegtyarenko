@@ -1,4 +1,4 @@
-#include "Fraction.hpp"
+#include "myString.hpp"
 #include <iostream>
 #include <cstring>
 #include <cctype>
