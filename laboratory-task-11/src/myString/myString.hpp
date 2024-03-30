@@ -16,15 +16,21 @@ public:
     MyString(const char*);
     MyString(const MyString&);
     ~MyString();
+
     size_t getSize() const;
-    void printString();
     const char* getCString() const;
+    void printString();
+
     void toLowerCase();
     void toUpperCase();
+
     char& operator[](int);
+
     MyString& operator=(const MyString& right);
     MyString& operator+=(const MyString& right);
+
     bool operator==(const MyString&);
+    
     friend std::istream& operator>>(std::istream& in, MyString& right);
     friend std::ostream& operator<<(std::ostream& out, const MyString& right);
 };
