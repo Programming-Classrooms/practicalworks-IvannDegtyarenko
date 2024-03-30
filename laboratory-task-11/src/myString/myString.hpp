@@ -19,7 +19,7 @@ public:
 
     size_t getSize() const;
     const char* getCString() const;
-    void printString();
+    void printString() const;
 
     void toLowerCase();
     void toUpperCase();
@@ -30,6 +30,7 @@ public:
     MyString& operator+=(const MyString& right);
 
     bool operator==(const MyString&);
+    bool operator<(const MyString&);
     
     friend std::istream& operator>>(std::istream& in, MyString& right);
     friend std::ostream& operator<<(std::ostream& out, const MyString& right);

@@ -19,13 +19,21 @@ int main()
 		a.toUpperCase();
 		std::cout << a;
 		MyString c;
-		std::cout << c.getSize();
+		std::cout << c.getSize() << '\n';
 		MyString b("FER");
 		if (a == b) {
 			std::cout << "Strings are equal\n";
 		}
 		else {
 			std::cout << "Strings are not equal\n";
+		}
+		MyString v("abcr");
+		MyString n("abf");
+		if (v < n) {
+			std::cout << "Left is less\n";
+		}
+		else {
+			std::cout<<"Right is less\n";
 		}
 	}
 	catch (std::invalid_argument& e) {

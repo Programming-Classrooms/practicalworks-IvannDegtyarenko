@@ -14,20 +14,17 @@ MyString::MyString(const char* string) {
 	if (size == 0) {
 		throw std::invalid_argument("Wrong value of size");
 	}
-	std::cout << "constructor\n";
 	myString = new char[size + 1];
 	strcpy(myString, string);
 }
 
 MyString::MyString(const MyString& string) {
-	std::cout << "constructor of copy\n";
 	size = string.size;
 	myString = new char[size + 1];
 	strcpy(myString, string.myString);
 }
 
 MyString::~MyString() {
-	std::cout << "destructor\n";
 	delete[] myString;
 }
 
@@ -96,15 +93,29 @@ char& MyString::operator[](int index) {
 	return myString[index];
 }
 
-void MyString::printString() {
+void MyString::printString() const
+{
 	std::cout << this->myString << '\n';
 }
 
 bool MyString::operator==(const MyString& string) {
+	if (this->size != string.size) {
+		return false;
+	}
 	if (strcmp(this->myString, string.myString)) {
 		return false;
 	}
-	else {
-		return true;
+	return true;
+}
+
+bool MyString::operator<(const MyString& rhs)
+{
+    if (this->size != rhs.size) {
+		return this->size < rhs.size;
+	}
+	for (size_t i = 0; i < this->size; ++i) {
+		if (this->myString[i] != rhs.myString[i]) {
+			return this->myString[i] < rhs.myString[i];
+		}
 	}
 }
