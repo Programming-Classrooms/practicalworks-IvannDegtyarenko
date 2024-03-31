@@ -1,9 +1,11 @@
 #include "../classFolder/usualFraction.hpp"
+#include "../classFolder/matrix.hpp"
 
 
 int main()
 {
     try {
+		srand(time(NULL));
 		std::cout << ".............FRACTION..............\n";
 
 		UsualFraction main1;
@@ -20,8 +22,18 @@ int main()
 		main2.setNumerator(43);
 		main3.setNumerator(-41);
 		std::cout << main1 << " " << main2 << " " << main3 << '\n';
+
+		std::cout << "...........MATRIX........\n";
+		Matrix matrix1(4, 7);
+		std::cout << matrix1;
 	}
 	catch (std::invalid_argument& e) {
+		std::cerr << e.what() << '\n';
+	}
+	catch (std::out_of_range& e){
+		std::cerr << e.what() << '\n';
+	}
+	catch (std::runtime_error& e){
 		std::cerr << e.what() << '\n';
 	}
     return 0;

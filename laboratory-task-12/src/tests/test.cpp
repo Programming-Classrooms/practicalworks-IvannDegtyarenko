@@ -268,3 +268,5 @@ TEST(testOperators, testEq)
     EXPECT_EQ(test1.getNumerator(), -6);
     EXPECT_EQ(test1.getDenominator(), 13);
 }
+
+//....................MATRIX...............

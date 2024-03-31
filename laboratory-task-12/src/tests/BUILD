@@ -1,6 +1,6 @@
 cc_test(
     name = "tests",
-    srcs = ["tests.cpp"],
+    srcs = ["test.cpp"],
     deps = [
         "@googletest//:gtest_main",
         "//src/classFolder:classFolder",
