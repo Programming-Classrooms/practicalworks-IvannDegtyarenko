@@ -8,24 +8,27 @@ int main()
 		srand(time(NULL));
 		std::cout << ".............FRACTION..............\n";
 
-		UsualFraction main1;
-		std::cout << main1 << '\n';
-		UsualFraction main2(7, -13);
-		UsualFraction main3(main2);
+		UsualFraction fraction1;
+		std::cout << fraction1 << '\n';
+		UsualFraction fraction2(7, -13);
+		UsualFraction fraction3(fraction2);
 
-		std::cout << main3 << '\n';
+		std::cout << fraction3 << '\n';
 
-		std::cout << main1.getNumerator() << " " << main2.getNumerator() << " " << main3.getNumerator() << '\n';
-		std::cout << main1.getDenominator() << " " << main2.getDenominator() << " " << main3.getDenominator() << '\n';
+		std::cout << fraction1.getNumerator() << " " << fraction2.getNumerator() << " " << fraction3.getNumerator() << '\n';
+		std::cout << fraction1.getDenominator() << " " << fraction2.getDenominator() << " " << fraction3.getDenominator() << '\n';
 
-		main1.setNumerator(6);
-		main2.setNumerator(43);
-		main3.setNumerator(-41);
-		std::cout << main1 << " " << main2 << " " << main3 << '\n';
+		fraction1.setNumerator(6);
+		fraction2.setNumerator(43);
+		fraction3.setNumerator(-41);
+		std::cout << fraction1 << " " << fraction2 << " " << fraction3 << '\n';
 
 		std::cout << "...........MATRIX........\n";
-		Matrix matrix1(4, 7);
+		Matrix matrix1(1, 1);
 		std::cout << matrix1;
+		matrix1.setMtrxElement(0, 0, 15);
+		std::cout << matrix1 << '\n';
+		std::cout<< 2 * matrix1;
 	}
 	catch (std::invalid_argument& e) {
 		std::cerr << e.what() << '\n';

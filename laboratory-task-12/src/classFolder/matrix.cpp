@@ -21,16 +21,19 @@ void Matrix::fillMatrix()
 	}
 }
 
-Matrix::Matrix(int initR, int initC) : mtrx(new double*[initR]), rows(initR), columns(initC)
+Matrix::Matrix(int initR, int initC)
 {
 	if (initC <= 0) {
 		throw std::invalid_argument("Invalid argument exception caught: Can't use 0 value or less as amount of Columns");
 	}
+	columns = initC;
 
 	if (initR <= 0) {
 		throw std::invalid_argument("Invalid argument exception caught: Can't use 0 value or less as amount of Rows");
 	}
+	rows = initR;
 
+	mtrx = new double*[initR];
 	for (size_t i = 0; i < initR; ++i) {
 		mtrx[i] = new double[initC];
 	}
@@ -43,7 +46,12 @@ Matrix::Matrix(const Matrix& rhsInit) : mtrx(new double*[rhsInit.rows]), rows(rh
 	for (size_t i = 0; i < rhsInit.rows; ++i) {
 		mtrx[i] = new double[rhsInit.columns];
 	}
-	fillMatrix();
+
+	for (size_t i = 0; i < rows; ++i) {
+		for (size_t j = 0; j < columns; ++j) {
+			mtrx[i][j] = rhsInit.mtrx[i][j];
+		}
+	}
 }
 
 Matrix::~Matrix()
@@ -75,7 +83,7 @@ void Matrix::getMatrix() const
 	std::cout << '\n';
 }
 
-double& Matrix::getMatrixElement(int indexR, int indexC) const
+double& Matrix::getMatrixElement(const int& indexR, const int& indexC) const
 {
 	if (indexR < 0 || indexR >= rows) {
 		throw std::out_of_range("Out of range exception caught: Invalid index for Rows");
@@ -88,8 +96,12 @@ double& Matrix::getMatrixElement(int indexR, int indexC) const
 	return mtrx[indexR][indexC];
 }
 
-void Matrix::setRows(int initR)
+void Matrix::setRows(const int& initR)
 {
+	if (initR <= 0) {
+		throw std::invalid_argument("Invalid argument exception caught: Can't use 0 value or less as amount of Rows");
+	}
+
 	for (size_t i = 0; i < rows; ++i) {
 		delete[] mtrx[i];
 	}
@@ -102,8 +114,12 @@ void Matrix::setRows(int initR)
 	fillMatrix();
 }
 
-void Matrix::setColumns(int initC)
+void Matrix::setColumns(const int& initC)
 {
+	if (initC <= 0) {
+		throw std::invalid_argument("Invalid argument exception caught: Can't use 0 value or less as amount of Columns");
+	}
+
 	for (size_t i = 0; i < rows; ++i) {
 		delete[] mtrx[i];
 	}
@@ -116,6 +132,19 @@ void Matrix::setColumns(int initC)
 	fillMatrix();
 }
 
+void Matrix::setMtrxElement(const int & indexR, const int & indexC, const int & initNumber)
+{
+	if (indexR < 0 || indexR >= rows) {
+		throw std::out_of_range("Out of range exception caught: Invalid index for Rows");
+	}
+
+	if (indexC < 0 || indexC >= columns) {
+		throw std::out_of_range("Out of range exception caught: Invalid index for Columns");
+	}
+
+	this->mtrx[indexR][indexC] = initNumber;
+}
+
 Matrix& Matrix::operator=(const Matrix& rhs)
 {
 	if (this != &rhs) {
@@ -123,12 +152,14 @@ Matrix& Matrix::operator=(const Matrix& rhs)
 			delete[] mtrx[i];
 		}
 		delete[] mtrx;
+
 		this->rows = rhs.rows;
 		this->columns = rhs.columns;
 		mtrx = new double* [rows];
 		for (size_t i = 0; i < rows; ++i) {
 			mtrx[i] = new double[columns];
 		}
+
 		for (size_t i = 0; i < rows; ++i) {
 			for (size_t j = 0; j < columns; ++j) {
 				mtrx[i][j] = rhs.mtrx[i][j];

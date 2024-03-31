@@ -23,10 +23,11 @@ public:
 	int getRows() const;
 	int getColumns() const;
 	void getMatrix() const;
-	double& getMatrixElement(int, int) const;
+	double& getMatrixElement(const int&, const int&) const;
 
-	void setRows(int);
-	void setColumns(int);
+	void setRows(const int&);
+	void setColumns(const int&);
+	void setMtrxElement(const int&, const int&, const int&);
 	
 	Matrix& operator=(const Matrix&);
 	Matrix& operator+=(const Matrix&);

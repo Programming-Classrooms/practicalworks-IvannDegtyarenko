@@ -1,17 +1,18 @@
-#include "../classFolder/usualFraction.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
+#include "../classFolder/usualFraction.hpp"
+#include "../classFolder/matrix.hpp"
 
 
 //................FRACTION.............
-TEST(testConstructors, testDefaultConstructor)
+TEST(testFractionConstructors, testDefaultConstructor)
 {
     UsualFraction test;
     EXPECT_EQ(test.getNumerator(), 0);
     EXPECT_EQ(test.getDenominator(), 1);
 }
 
-TEST(testConstructors, testParameterConstructor)
+TEST(testFractionConstructors, testParameterConstructor)
 {
     EXPECT_THROW(UsualFraction(1,0), std::invalid_argument);
     EXPECT_NO_THROW(UsualFraction(1,1));
@@ -23,7 +24,7 @@ TEST(testConstructors, testParameterConstructor)
     EXPECT_EQ(test2.getDenominator(), 7);
 }
 
-TEST(testConstructors, testCopyConstructor)
+TEST(testFractionConstructors, testCopyConstructor)
 {
     UsualFraction test1(8, -9);
     UsualFraction test2(test1);
@@ -31,7 +32,7 @@ TEST(testConstructors, testCopyConstructor)
     EXPECT_EQ(test2.getDenominator(), 9);
 }
 
-TEST(testGetters, testNumeratorGetter)
+TEST(testFractionGetters, testNumeratorGetter)
 {
     UsualFraction test1(-7, 9);
     UsualFraction test2(5, -4);
@@ -41,7 +42,7 @@ TEST(testGetters, testNumeratorGetter)
     EXPECT_NE(test2.getNumerator(), 5);
 }
 
-TEST(testGetters, testDenominatorGetter)
+TEST(testFractionGetters, testDenominatorGetter)
 {
     UsualFraction test1(8, -9);
     UsualFraction test2(-7, 15);
@@ -51,7 +52,7 @@ TEST(testGetters, testDenominatorGetter)
     EXPECT_NE(test2.getDenominator(), -15);
 }
 
-TEST(testSetters, testNumeratorSetter)
+TEST(testFractionSetters, testNumeratorSetter)
 {
     UsualFraction test1(4, 7);
     EXPECT_EQ(test1.getNumerator(), 4);
@@ -59,7 +60,7 @@ TEST(testSetters, testNumeratorSetter)
     EXPECT_EQ(test1.getNumerator(), 8);
 }
 
-TEST(testSetters, testDenominatorSetter)
+TEST(testFractionSetters, testDenominatorSetter)
 {
     UsualFraction test1(4, -5);
     EXPECT_EQ(test1.getDenominator(), 5);
@@ -68,7 +69,7 @@ TEST(testSetters, testDenominatorSetter)
     EXPECT_EQ(test1.getDenominator(), 9);
 }
 
-TEST(testClassMethod, testSimplifyMethod)
+TEST(testFractionClassMethod, testSimplifyMethod)
 {
     UsualFraction test1(24, 15);
     UsualFraction test2(8, 5);
@@ -79,7 +80,7 @@ TEST(testClassMethod, testSimplifyMethod)
     EXPECT_EQ(test1.getDenominator(), test2.getDenominator());
 }
 
-TEST(testOperators, testOperatorPlus)
+TEST(testFractionOperators, testOperatorPlus)
 {
     UsualFraction test1(-7, 3);
     UsualFraction test2(11, -13);
@@ -92,7 +93,7 @@ TEST(testOperators, testOperatorPlus)
     EXPECT_EQ((test1 + test2).getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testOperatorMinus)
+TEST(testFractionOperators, testOperatorMinus)
 {
     UsualFraction test1(-16, 9);
     UsualFraction test2(8, -7);
@@ -105,7 +106,7 @@ TEST(testOperators, testOperatorMinus)
     EXPECT_EQ((test1 - test2).getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testOperatorMultiply)
+TEST(testFractionOperators, testOperatorMultiply)
 {
     UsualFraction test1(7, -25);
     UsualFraction test2(-50, 35);
@@ -118,7 +119,7 @@ TEST(testOperators, testOperatorMultiply)
     EXPECT_EQ((test1 * test2).getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testOperatorDivide)
+TEST(testFractionOperators, testOperatorDivide)
 {
     UsualFraction test1(-6, 13);
     UsualFraction test2(41, -7);
@@ -131,7 +132,7 @@ TEST(testOperators, testOperatorDivide)
     EXPECT_EQ((test1 / test2).getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testPrefixIncrement)
+TEST(testFractionOperators, testPrefixIncrement)
 {
     UsualFraction test1(5, 7);
     UsualFraction test2(12, 7);
@@ -139,7 +140,7 @@ TEST(testOperators, testPrefixIncrement)
     EXPECT_EQ((++test1).getNumerator(), test2.getNumerator());
 }
 
-TEST(testOperators, testPrefixDecrement)
+TEST(testFractionOperators, testPrefixDecrement)
 {
     UsualFraction test1(24, 5);
     UsualFraction test2(19, 5);
@@ -147,7 +148,7 @@ TEST(testOperators, testPrefixDecrement)
     EXPECT_EQ((--test1).getNumerator(), test2.getNumerator());
 }
 
-TEST(testOperators, testPostfixIncrement)
+TEST(testFractionOperators, testPostfixIncrement)
 {
     UsualFraction test1(5, 7);
     UsualFraction test2(12, 7);
@@ -155,7 +156,7 @@ TEST(testOperators, testPostfixIncrement)
     EXPECT_EQ(test1.getNumerator(), test2.getNumerator());
 }
 
-TEST(testOperators, testPostfixDecrement)
+TEST(testFractionOperators, testPostfixDecrement)
 {
     UsualFraction test1(24, 5);
     UsualFraction test2(19, 5);
@@ -163,7 +164,7 @@ TEST(testOperators, testPostfixDecrement)
     EXPECT_EQ(test1.getNumerator(), test2.getNumerator());
 }
 
-TEST(testUnaryOperators, testUnaryMinus)
+TEST(testFractionUnaryOperators, testUnaryMinus)
 {
     UsualFraction test1(7, -8);
     EXPECT_EQ(-test1.getNumerator(), 7);
@@ -172,7 +173,7 @@ TEST(testUnaryOperators, testUnaryMinus)
     EXPECT_EQ(-test2.getNumerator(), 5);
 }
 
-TEST(testUnaryOperators, testInverseFraction)
+TEST(testFractionUnaryOperators, testInverseFraction)
 {
     UsualFraction test1(6, 7);
     UsualFraction test2(7, 6);
@@ -182,7 +183,7 @@ TEST(testUnaryOperators, testInverseFraction)
     EXPECT_THROW((!badFraction), std::invalid_argument);
 }
 
-TEST(testBoolOperators, testOperatorNEq)
+TEST(testFractionBoolOperators, testOperatorNEq)
 {
     UsualFraction test1(5, 7);
     UsualFraction test2(test1);
@@ -192,7 +193,7 @@ TEST(testBoolOperators, testOperatorNEq)
     EXPECT_TRUE(test2 != test3);
 }
 
-TEST(testBoolOperators, testOperatorLess)
+TEST(testFractionBoolOperators, testOperatorLess)
 {
     UsualFraction test1(5, 7);
     UsualFraction test2(6, 7);
@@ -204,7 +205,7 @@ TEST(testBoolOperators, testOperatorLess)
     EXPECT_FALSE(test3 < test4);
 }
 
-TEST(testOperators, testPlusEq)
+TEST(testFractionOperators, testPlusEq)
 {
     UsualFraction test1(-7, 3);
     UsualFraction test2(11, -13);
@@ -218,7 +219,7 @@ TEST(testOperators, testPlusEq)
     EXPECT_EQ(test1.getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testMinusEq)
+TEST(testFractionOperators, testMinusEq)
 {
     UsualFraction test1(-16, 9);
     UsualFraction test2(8, -7);
@@ -232,7 +233,7 @@ TEST(testOperators, testMinusEq)
     EXPECT_EQ(test1.getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testMultiplyEq)
+TEST(testFractionOperators, testMultiplyEq)
 {
     UsualFraction test1(7, -25);
     UsualFraction test2(-50, 35);
@@ -246,7 +247,7 @@ TEST(testOperators, testMultiplyEq)
     EXPECT_EQ(test1.getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testDivideEq)
+TEST(testFractionOperators, testDivideEq)
 {
     UsualFraction test1(-6, 13);
     UsualFraction test2(41, -7);
@@ -260,7 +261,7 @@ TEST(testOperators, testDivideEq)
     EXPECT_EQ(test1.getDenominator(), checkTest.getDenominator());
 }
 
-TEST(testOperators, testEq)
+TEST(testFractionOperators, testEq)
 {
     UsualFraction test1;
     UsualFraction test2(6, -13);
@@ -270,3 +271,156 @@ TEST(testOperators, testEq)
 }
 
 //....................MATRIX...............
+
+TEST(testMatrixConstructors, testDefaultConstructor)
+{
+    Matrix test1;
+    EXPECT_EQ(test1.getColumns(), 1);
+    EXPECT_EQ(test1.getRows(), 1);
+    EXPECT_THROW(Matrix wrongMtrx1(-4, 7), std::invalid_argument);
+    EXPECT_THROW(Matrix wrongMtrx2(5, -32), std::invalid_argument);
+    Matrix test2(6, 3);
+    EXPECT_EQ(test2.getRows(), 6);
+    EXPECT_EQ(test2.getColumns(), 3);
+}
+
+TEST(testMatrixConstructors, testCopyConstructor)
+{
+    Matrix test1(5, 7);
+    Matrix test2(test1);
+    EXPECT_EQ(test2.getRows(), 5);
+    EXPECT_EQ(test2.getColumns(), 7);
+}
+
+TEST(testMatrixGetters, testRowsGetter)
+{
+    Matrix test1(7, 4);
+    EXPECT_NE(test1.getRows(), 4);
+    EXPECT_EQ(test1.getRows(), 7);
+}
+
+TEST(testMatrixGetters, testColumnsGetter)
+{
+    Matrix test1(5, 8);
+    EXPECT_NE(test1.getColumns(), 5);
+    EXPECT_EQ(test1.getColumns(), 8);
+}
+
+TEST(testMatrixGetters, testMatrixElemGetter)
+{
+    Matrix test1(1, 1);
+    EXPECT_THROW(test1.getMatrixElement(5, 0), std::out_of_range);
+    EXPECT_THROW(test1.getMatrixElement(0, -2), std::out_of_range);
+    Matrix test2(test1);
+    EXPECT_EQ(test1.getMatrixElement(0, 0), test2.getMatrixElement(0, 0));
+}
+
+TEST(testMatrixSetters, testRowsSetter)
+{
+    Matrix test1(5, 4);
+    EXPECT_EQ(test1.getRows(), 5);
+    EXPECT_NE(test1.getRows(), 8);
+    EXPECT_THROW(test1.setRows(-6), std::invalid_argument);
+    test1.setRows(8);
+    EXPECT_EQ(test1.getRows(), 8);
+    EXPECT_NE(test1.getRows(), 5);
+}
+
+TEST(testMatrixSetters, testColumnsSetter)
+{
+    Matrix test1(3, 7);
+    EXPECT_EQ(test1.getColumns(), 7);
+    EXPECT_NE(test1.getColumns(), 15);
+    EXPECT_THROW(test1.setColumns(0), std::invalid_argument);
+    test1.setColumns(15);
+    EXPECT_NE(test1.getColumns(), 7);
+    EXPECT_EQ(test1.getColumns(), 15);
+}
+
+TEST(testMatrixSetters, testElemSetter)
+{
+    Matrix test1(3, 2);
+    EXPECT_THROW(test1.setMtrxElement(5, 1, 6), std::out_of_range);
+    EXPECT_THROW(test1.setMtrxElement(2, 2, 6), std::out_of_range);
+    test1.setMtrxElement(2, 1, 45);
+    EXPECT_EQ(test1.getMatrixElement(2, 1), 45);
+}
+
+TEST(testMatrixOperators, testEq)
+{
+    Matrix test1(4, 5);
+    Matrix test2(3, 2);
+    EXPECT_NE(test1.getColumns(), test2.getColumns());
+    EXPECT_NE(test1.getRows(), test2.getRows());
+
+    test1 = test2;
+    EXPECT_EQ(test1.getColumns(), test2.getColumns());
+    EXPECT_EQ(test1.getRows(), test2.getRows());
+
+    for (size_t i = 0; i < test2.getRows(); ++i) {
+        for (size_t j = 0; j < test2.getColumns(); ++j) {
+            EXPECT_EQ(test1.getMatrixElement(i, j), test2.getMatrixElement(i, j));
+        }
+    }
+}
+
+TEST(testMatrixOperators, testPlusEq)
+{
+    Matrix test1(2, 2);
+    Matrix test2(4, 6);
+    Matrix test3(2, 2);
+    Matrix test4(test1);
+    EXPECT_THROW((test1 += test2), std::runtime_error);
+    test1 += test3;
+
+    for (size_t i = 0; i < test1.getRows(); ++i) {
+        for (size_t j = 0; j < test1.getColumns(); ++j) {
+            EXPECT_EQ(test1.getMatrixElement(i, j), (test3.getMatrixElement(i, j) + test4.getMatrixElement(i, j)));
+        }
+    }
+}
+
+TEST(testMatrixOperators, testMinusEq)
+{
+    Matrix test1(2, 2);
+    Matrix test2(4, 6);
+    Matrix test3(2, 2);
+    Matrix test4(test1);
+    EXPECT_THROW((test1 -= test2), std::runtime_error);
+    test1 -= test3;
+
+    for (size_t i = 0; i < test1.getRows(); ++i) {
+        for (size_t j = 0; j < test1.getColumns(); ++j) {
+            EXPECT_EQ(test1.getMatrixElement(i, j), (test4.getMatrixElement(i, j) - test3.getMatrixElement(i, j)));
+        }
+    }
+}
+
+TEST(testMatrixOperators, testScalarMultiply)
+{
+    Matrix test1(1, 1);
+    test1.setMtrxElement(0, 0, 7);
+    6 * test1;
+    EXPECT_EQ(test1.getMatrixElement(0, 0), 42);
+    Matrix test2(1, 1);
+    test2.setMtrxElement(0, 0, 8);
+    test2 * 8;
+    EXPECT_EQ(test2.getMatrixElement(0, 0), 64);
+}
+
+TEST(testMatrixOperators, testScalarDivide)
+{
+    Matrix test1(1, 1);
+    test1.setMtrxElement(0, 0, 72);
+    EXPECT_THROW((test1 / 0), std::invalid_argument);
+    test1 / 8;
+    EXPECT_EQ(test1.getMatrixElement(0, 0), 9);
+}
+
+TEST(testMatrixBoolOperators, testNEq)
+{
+    Matrix test1(2, 2), test2(test1);
+    EXPECT_FALSE(test1 != test2);
+    test2.setMtrxElement(1, 0, 54);
+    EXPECT_TRUE(test1 != test2);
+}
