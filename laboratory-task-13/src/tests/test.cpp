@@ -3,7 +3,12 @@
 #include "../classFolder/person.hpp"
 #include "../classFolder/student.hpp"
 #include "../classFolder/professor.hpp"
+#include "../classFolder/studentBeforeSession.hpp"
+#include "../classFolder/studentAfterFirstSession.hpp"
+#include "../classFolder/studentAfterSecondSession.hpp"
 
+
+//.................STUDENT_PROFESSOR...........
 TEST(testPersonConstructors, testParameterConstructor)
 {
     EXPECT_THROW(Person test1(""), std::runtime_error);
@@ -130,4 +135,31 @@ TEST(testProfessorSetters, testDepartmentSetter)
     EXPECT_THROW(test1.setDepartment(""), std::runtime_error);
     test1.setDepartment("FPMI");
     EXPECT_STREQ(test1.getDepartment(), "FPMI");
+}
+
+//.............STUDENT_SESSION.........
+TEST(testStudentBeforeSessionConstructors, testParameterConstructor)
+{
+    EXPECT_THROW(StudentBeforeSession("", 3, 324, 5452), std::invalid_argument);
+    EXPECT_THROW(StudentBeforeSession("TEST", 7, 4532, 432442), std::logic_error);
+    StudentBeforeSession test("TEST", 1, 7121, 43432);
+    EXPECT_EQ(test.getName(), "TEST");
+    EXPECT_EQ(test.getCourse(), 1);
+    EXPECT_EQ(test.getGroup(), 7121);
+    EXPECT_EQ(test.getBookNumber(), 43432);
+}
+
+TEST(testStudentBeforeSessionConstructors, testCopyConstructor)
+{
+    StudentBeforeSession test1("TEST", 2, 3442, 7), test2(test1, 56);
+    EXPECT_EQ(test2.getName(), "TEST");
+    EXPECT_EQ(test2.getCourse(), 2);
+    EXPECT_EQ(test2.getGroup(), 3442);
+    EXPECT_NE(test2.getBookNumber(), 7);
+    EXPECT_EQ(test2.getBookNumber(), 56);
+}
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
 }
