@@ -424,3 +424,8 @@ TEST(testMatrixBoolOperators, testNEq)
     test2.setMtrxElement(1, 0, 54);
     EXPECT_TRUE(test1 != test2);
 }
+
+int main(int argc, char **argv) {
+    ::testing::InitGoogleTest(&argc, argv);
+    return RUN_ALL_TESTS();
+}
