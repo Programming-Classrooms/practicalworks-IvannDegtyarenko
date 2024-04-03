@@ -18,6 +18,7 @@ protected:
 public:
 	StudentBeforeSession() = delete;
 	StudentBeforeSession(std::string, size_t, size_t, size_t);
+	StudentBeforeSession(const StudentBeforeSession&) = delete;
 	StudentBeforeSession(const StudentBeforeSession&, size_t);
 	~StudentBeforeSession() {}
 

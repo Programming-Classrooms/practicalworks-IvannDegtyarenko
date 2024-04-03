@@ -155,8 +155,70 @@ TEST(testStudentBeforeSessionConstructors, testCopyConstructor)
     EXPECT_EQ(test2.getName(), "TEST");
     EXPECT_EQ(test2.getCourse(), 2);
     EXPECT_EQ(test2.getGroup(), 3442);
-    EXPECT_NE(test2.getBookNumber(), 7);
+    EXPECT_NE(test2.getBookNumber(), test1.getBookNumber());
     EXPECT_EQ(test2.getBookNumber(), 56);
+}
+
+TEST(testStudentBeforeSessionSetters, testNameSetter)
+{
+    StudentBeforeSession test("TEST", 1, 45, 5343);
+    EXPECT_EQ(test.getName(), "TEST");
+    EXPECT_THROW(test.setNewName(""), std::invalid_argument);
+    test.setNewName("EQ");
+    EXPECT_NE(test.getName(), "TEST");
+    EXPECT_EQ(test.getName(), "EQ");
+}
+
+TEST(testStudentBeforeSessionSetters, testGroupSetter)
+{
+    StudentBeforeSession test("TEST", 1, 533, 5524);
+    EXPECT_EQ(test.getGroup(), 533);
+    test.setNewGroup(4);
+    EXPECT_NE(test.getGroup(), 533);
+    EXPECT_EQ(test.getGroup(), 4);
+}
+
+TEST(testStudentBeforeSessionSetters, testCourseSetter)
+{
+    StudentBeforeSession test("TEST", 5, 4, 545);
+    EXPECT_THROW(test.setNewCourse(5353), std::logic_error);
+    test.setNewCourse(3);
+    EXPECT_EQ(test.getCourse(), 3);
+}
+
+TEST(testSudentFirstSessionConstructor, testParameterConstructor)
+{
+    EXPECT_THROW(StudentAfterFirstSession ("", 4, 56, 7656), std::invalid_argument);
+    EXPECT_THROW(StudentAfterFirstSession ("TEST", 65, 56, 7656), std::logic_error);
+    StudentAfterFirstSession test("TEST", 4, 654, 333);
+    EXPECT_EQ(test.getName(), "TEST");
+    EXPECT_EQ(test.getCourse(), 4);
+    EXPECT_EQ(test.getGroup(), 654);
+    EXPECT_EQ(test.getBookNumber(), 333);
+}
+
+TEST(testSudentFirstSessionConstructor, testCopyConstructor)
+{
+    StudentAfterFirstSession test1("TEST", 2, 768, 777), test2(test1, 696);
+    EXPECT_EQ(test2.getName(), "TEST");
+    EXPECT_EQ(test2.getCourse(), 2);
+    EXPECT_EQ(test2.getGroup(), 768);
+    EXPECT_NE(test2.getBookNumber(), test1.getBookNumber());
+    EXPECT_EQ(test2.getBookNumber(), 696); 
+}
+
+TEST(testStudentFirstSessionMethods, testMarksWork)
+{
+    StudentAfterFirstSession test("TEST", 1, 7554, 5425);
+    EXPECT_THROW(test[8], std::invalid_argument);
+    EXPECT_THROW(test.changeMark(8, 5), std::invalid_argument);
+    EXPECT_THROW(test.changeMark(3, 15), std::invalid_argument);
+    test.changeMark(0, 7);
+    EXPECT_EQ(test[0], 7);
+    test.changeMark(1, 9);
+    test.changeMark(2, 6);
+    test.changeMark(3, 4);
+    EXPECT_DOUBLE_EQ(test.getAverageMark(), 6.5);
 }
 
 int main(int argc, char **argv) {

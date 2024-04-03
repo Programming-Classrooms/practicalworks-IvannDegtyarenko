@@ -12,6 +12,7 @@ private:
 public:
     StudentAfterSecondSession() = delete;
     StudentAfterSecondSession(std::string, size_t, size_t, size_t);
+    StudentAfterSecondSession(const StudentAfterSecondSession&) = delete;
     StudentAfterSecondSession(const StudentAfterSecondSession&, size_t);
     ~StudentAfterSecondSession();
 

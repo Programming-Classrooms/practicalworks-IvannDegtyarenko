@@ -11,6 +11,7 @@ protected:
 public:
 	StudentAfterFirstSession() = delete;
 	StudentAfterFirstSession(std::string, size_t, size_t, size_t);
+	StudentAfterFirstSession(const StudentAfterFirstSession&) = delete;
 	StudentAfterFirstSession(const StudentAfterFirstSession&, size_t);
 	~StudentAfterFirstSession();
 
