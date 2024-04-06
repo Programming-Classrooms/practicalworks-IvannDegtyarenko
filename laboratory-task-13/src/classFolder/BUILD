@@ -6,7 +6,12 @@ cc_library(
         "professor.cpp",
         "studentBeforeSession.cpp",
         "studentAfterFirstSession.cpp",
-        "studentAfterSecondSession.cpp"
+        "studentAfterSecondSession.cpp",
+        "tree.cpp",
+        "forestTree.cpp",
+        "fruitTree.cpp",
+        "treeContainer.cpp",
+
     ],
     hdrs = [
         "person.hpp",
@@ -14,7 +19,12 @@ cc_library(
         "professor.hpp",
         "studentBeforeSession.hpp",
         "studentAfterFirstSession.hpp",
-        "studentAfterSecondSession.hpp"
+        "studentAfterSecondSession.hpp",
+        "tree.hpp",
+        "forestTree.hpp",
+        "fruitTree.hpp",
+        "treeContainer.hpp",
+        
     ],
     visibility = ["//visibility:public"],
 )

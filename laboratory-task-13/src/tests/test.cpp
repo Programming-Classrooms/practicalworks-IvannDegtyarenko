@@ -220,6 +220,7 @@ TEST(testStudentFirstSessionMethods, testMarksWork)
     test.changeMark(3, 4);
     EXPECT_DOUBLE_EQ(test.getAverageMark(), 6.5);
 }
+//.................TREES...............
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

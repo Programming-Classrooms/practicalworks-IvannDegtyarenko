@@ -4,4 +4,7 @@ cc_binary(
     deps = [
         "//src/classFolder:classFolder",
     ],
+    data = [
+        "//src/files:files",
+    ],
 )
