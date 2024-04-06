@@ -6,6 +6,7 @@
 #include "../classFolder/studentBeforeSession.hpp"
 #include "../classFolder/studentAfterFirstSession.hpp"
 #include "../classFolder/studentAfterSecondSession.hpp"
+#include "../classFolder/treeContainer.hpp"
 
 
 //.................STUDENT_PROFESSOR...........
@@ -220,7 +221,45 @@ TEST(testStudentFirstSessionMethods, testMarksWork)
     test.changeMark(3, 4);
     EXPECT_DOUBLE_EQ(test.getAverageMark(), 6.5);
 }
+
 //.................TREES...............
+TEST(testTrees, testConstructorsAndGetters)
+{
+    FruitTree testTree1("Test", 45, treeTypes::Leafy, 5.7, 53);
+    EXPECT_EQ(testTree1.getTreeAge(), 45);
+    EXPECT_EQ(testTree1.getTreeName(), "Test");
+    EXPECT_EQ(testTree1.getTreeType(), treeTypes::Leafy);
+    EXPECT_DOUBLE_EQ(testTree1.getCropMass(), 5.7);
+    EXPECT_EQ(testTree1.getStorageDration(), 53);
+
+    ForestTree testTree2("Test", 2, treeTypes::Coniferous, 12.4);
+    EXPECT_EQ(testTree2.getTreeName(), "Test");
+    EXPECT_EQ(testTree2.getTreeAge(), 2);
+    EXPECT_EQ(testTree2.getTreeType(), treeTypes::Coniferous);
+    EXPECT_DOUBLE_EQ(testTree2.getWoodAmount(), 12.4);
+}
+
+TEST(testTreeContainer, testWork)
+{
+    TreesContainer testContainer;
+    EXPECT_EQ(testContainer.getContainerSize(), 0);
+
+    FruitTree* testTree1 = new FruitTree("Test", 45, treeTypes::Leafy, 5.7, 53);
+    ForestTree* testTree2 = new ForestTree("Test", 2, treeTypes::Coniferous, 12.4);
+    FruitTree* testTree3 = new FruitTree("Test", 81, treeTypes::Leafy, 6.12, 32);
+
+    testContainer.pushBack(testTree1);
+    EXPECT_EQ(testContainer.getContainerSize(), 1);
+    testContainer.pushBack(testTree2);
+    EXPECT_EQ(testContainer.getContainerSize(), 2);
+    testContainer.pushBack(testTree3);
+    
+    EXPECT_EQ(testContainer.countingByTreeType(treeTypes::Coniferous), 1);
+    EXPECT_EQ(testContainer.countingByTreeType(treeTypes::Leafy), 2);
+    delete testTree1;
+    delete testTree2;
+    delete testTree3;
+}
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);

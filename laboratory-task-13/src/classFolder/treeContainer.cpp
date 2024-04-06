@@ -55,16 +55,19 @@ std::istream& operator>>(std::istream& in, TreesContainer& rhs)
                 initTree = new ForestTree(treeName, treeAge, (type == fruit ? treeTypes::Leafy : treeTypes::Coniferous), woodAmount);
                 rhs.pushBack(initTree);
             }
+
             else if (treeType == "fruit") {
                 in >> cropMass;
                 in >> storageDuration;
                 initTree = new FruitTree(treeName, treeAge, (type == fruit ? treeTypes::Leafy : treeTypes::Coniferous), cropMass, storageDuration);
                 rhs.pushBack(initTree);
             }
+
             else {
                 throw std::runtime_error("Wrong tree Type name!");
             }
         }
+        
         else {
             throw std::runtime_error("Can't find right Types of trees");
         }
