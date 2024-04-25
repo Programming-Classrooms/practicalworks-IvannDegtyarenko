@@ -161,7 +161,7 @@ void deleteEQElem(std::vector<int32_t>& vector)
 {
     for (size_t i = 0; i < vector.size(); ++i) {
         for (size_t j = i+1; j < vector.size(); ++j) {
-            if (vector[i] == vector[j]) {
+            if (abs(vector[i]) == abs(vector[j])) {
                 vector.erase(vector.begin() + j);
             }
         }
