@@ -39,6 +39,15 @@ Stack<T>::~Stack()
     delete[] this->stack;
 }
 
+template<>
+Stack<char*>::~Stack()
+{
+    if (!this->isEmpty()) {
+        delete[] this->stack[this->topIndex--];
+    }
+    delete[] this->stack;
+}
+
 template <typename T>
 Stack<T>& Stack<T>::operator=(const Stack& src) 
 {
