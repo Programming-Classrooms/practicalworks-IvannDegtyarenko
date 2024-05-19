@@ -53,9 +53,7 @@ int main()
         greenWagons.print();
         std::cout << "Check red Wagons:\n";
         redWagons.print();
-
-        Stack<char*> lines;
-        lines.push("sd");
+        
     }
     catch (std::exception& err) {
         std::cerr << "Exception caught: " << err.what() << '\n';

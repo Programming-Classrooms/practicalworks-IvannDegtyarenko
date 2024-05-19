@@ -15,7 +15,6 @@ public:
     ~Wagon() {}
 
     Wagon& operator=(const Wagon&);
-    Wagon& operator=(std::string);
 
     std::string getColor() const;
 

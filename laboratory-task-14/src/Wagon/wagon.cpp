@@ -14,12 +14,6 @@ Wagon& Wagon::operator=(const Wagon& src)
     return *this;
 }
 
-Wagon& Wagon::operator=(std::string src)
-{
-    this->color = src;
-    return *this;
-}
-
 std::string Wagon::getColor() const
 {
     std::string safe = this->color;
