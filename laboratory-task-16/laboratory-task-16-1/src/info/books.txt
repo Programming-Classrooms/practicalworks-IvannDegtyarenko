@@ -1,0 +1,8 @@
+421;Orwell, George, Arthur;1984;1949;
+642;Dickens, Charles, John;Great Expectations;1861;
+864;Fitzgerald, Scott, F.;The Great Gatsby;1925;
+754;Murakami, Haruki, 春樹;Norwegian Wood;1987;
+434;Dostoevsky, Fyodor, Michailovich;Crime and Punishment;1866;
+197;Orwell, George, Arthur;Animal Farm;1945;
+945;Bradbury, Ray, Duglas;Fahrenheit 451;1953;
+758;Nabokov, Vladimir, Vladimirovich;Lolita;1955;

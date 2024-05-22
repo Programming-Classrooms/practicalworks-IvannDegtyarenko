@@ -1,0 +1,5 @@
+First Fisherman catched: Лещ Синец Язь 
+Second Fisherman catched: Окунь Язь 
+Third Fisherman catched: Язь 
+Fishes that every Fisherman has: Язь 
+Fish present in at least one fisherman: Лещ Окунь Синец Язь 
