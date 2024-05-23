@@ -37,8 +37,20 @@ int main()
         fout << '\n';
 
         std::set<std::string> sameFishes;
-        std::set_intersection(firstFisherman.begin(), firstFisherman.end(), secondFisherman.begin(), secondFisherman.end(), std::inserter(sameFishes, sameFishes.begin()));
-        std::set_intersection(sameFishes.begin(), sameFishes.end(), thirdFisherman.begin(), thirdFisherman.end(), std::inserter(sameFishes, sameFishes.begin()));
+        std::set_intersection(
+            firstFisherman.begin(), 
+            firstFisherman.end(), 
+            secondFisherman.begin(), 
+            secondFisherman.end(), 
+            std::inserter(sameFishes, sameFishes.begin())
+            );
+        std::set_intersection(
+            sameFishes.begin(),
+            sameFishes.end(), 
+            thirdFisherman.begin(),
+            thirdFisherman.end(),
+            std::inserter(sameFishes, sameFishes.begin())
+            );
         fout << "Fishes that every Fisherman has: ";
         for (const auto& i : sameFishes) {
             fout << i << " ";
@@ -46,8 +58,20 @@ int main()
         fout << '\n';
 
         std::set<std::string> catchedFishes;
-        std::set_union(firstFisherman.begin(), firstFisherman.end(), secondFisherman.begin(), secondFisherman.end(), std::inserter(catchedFishes, catchedFishes.begin()));
-        std::set_union(catchedFishes.begin(), catchedFishes.end(), thirdFisherman.begin(), thirdFisherman.end(), std::inserter(catchedFishes, catchedFishes.begin()));
+        std::set_union(
+            firstFisherman.begin(),
+            firstFisherman.end(),
+            secondFisherman.begin(), 
+            secondFisherman.end(), 
+            std::inserter(catchedFishes, catchedFishes.begin())
+            );
+        std::set_union(
+            catchedFishes.begin(), 
+            catchedFishes.end(), 
+            thirdFisherman.begin(), 
+            thirdFisherman.end(), 
+            std::inserter(catchedFishes, catchedFishes.begin())
+            );
         fout << "Fish present in at least one fisherman: ";
         for (const auto& i : catchedFishes) {
             fout << i << " ";
@@ -55,7 +79,13 @@ int main()
         fout << '\n';
 
         std::set<std::string> leftFishes;
-        std::set_difference(lake.begin(), lake.end(), catchedFishes.begin(), catchedFishes.end(), std::inserter(leftFishes, leftFishes.begin()));
+        std::set_difference(
+            lake.begin(), 
+            lake.end(), 
+            catchedFishes.begin(), 
+            catchedFishes.end(), 
+            std::inserter(leftFishes, leftFishes.begin())
+            );
         fout << "Fishes that are left in the lake: ";
         for (const auto& i : leftFishes) {
             fout << i << " ";
