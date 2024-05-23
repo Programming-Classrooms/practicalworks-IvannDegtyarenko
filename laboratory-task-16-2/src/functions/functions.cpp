@@ -2,18 +2,15 @@
 
 void checkFile(std::ifstream& file)
 {
-	if (!file.good())
-	{
-		throw std::runtime_error("File does not exist.\n");
-	}
-	if (!file)
-	{
-		throw std::runtime_error("File is not opened.\n");
-	}
-	if (file.peek() == EOF)
-	{
-		throw std::runtime_error("File is empty.\n");
-	}
+	if (!file.good()) {
+        throw std::runtime_error("File does not exist!");
+    }
+    if (!file) {
+        throw std::runtime_error("File is not opened!");
+    }
+    if (file.peek() == EOF) {
+        throw std::runtime_error("File is empty!");
+    }
 }
 
 void readWords(std::ifstream& fin, std::map<std::string, size_t>& allWords)

@@ -4,10 +4,9 @@ int main()
 {
     try {
         std::ifstream fin("src/info/data.txt");
-		checkFile(fin);
-
-		std::map<std::string, size_t> allWords;
-		readWords(fin, allWords);
+        checkFile(fin);
+        std::map<std::string, size_t> allWords;
+        readWords(fin, allWords);
         printInformation(allWords);
     }
     catch (std::exception& err) {
