@@ -1,25 +1,25 @@
-#include "aList.hpp"
+#include "AuthorList.hpp"
 
-AList::AList() : authorsList(std::set<Author>())
+AuthorList::AuthorList() : authorsList(std::set<Author>())
 {}
 
-AList::AList(const std::set<Author> &init) : authorsList(init)
+AuthorList::AuthorList(const std::set<Author> &init) : authorsList(init)
 {}
 
-AList::AList(const AList& src) : authorsList(src.authorsList)
+AuthorList::AuthorList(const AuthorList& src) : authorsList(src.authorsList)
 {}
 
-void AList::insert(const Author& src)
+void AuthorList::insert(const Author& src)
 {
     this->authorsList.insert(src);
 }
 
-void AList::emplace(const std::string& initSurename, const std::string& initName, const std::string& initFathername)
+void AuthorList::emplace(const std::string& initSurename, const std::string& initName, const std::string& initFathername)
 {
     this->authorsList.emplace(initSurename, initName, initFathername);
 }
 
-AList &AList::operator=(const AList& src)
+AuthorList& AuthorList::operator=(const AuthorList& src)
 {
     if (this != &src) {
         this->authorsList = src.authorsList;
@@ -27,7 +27,7 @@ AList &AList::operator=(const AList& src)
     return *this;
 }
 
-bool AList::operator==(const AList& rhs) const
+bool AuthorList::operator==(const AuthorList& rhs) const
 {
     if (this->authorsList.size() != rhs.authorsList.size()) {
         return false;
@@ -40,7 +40,7 @@ bool AList::operator==(const AList& rhs) const
     return true;
 }
 
-void AList::erase(const std::string& dSurename, const std::string& dName, const std::string& dFathername)
+void AuthorList::erase(const std::string& dSurename, const std::string& dName, const std::string& dFathername)
 {
     std::set<Author>::iterator elemToDelete = authorsList.find(Author(dSurename, dName, dFathername));
     if (elemToDelete == authorsList.end()) {
@@ -49,12 +49,12 @@ void AList::erase(const std::string& dSurename, const std::string& dName, const 
     authorsList.erase(elemToDelete);
 }
 
-bool AList::find(const Author& elemToFind)
+bool AuthorList::find(const Author& elemToFind)
 {
     return authorsList.find(elemToFind) != authorsList.end(); 
 }
 
-std::ostream& operator<<(std::ostream& out, const AList& src)
+std::ostream& operator<<(std::ostream& out, const AuthorList& src)
 {
     for (const auto& i : src.authorsList) {
         out << i;

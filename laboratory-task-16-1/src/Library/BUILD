@@ -1,7 +1,7 @@
 cc_library(
     name = "Library",
-    srcs = ["library.cpp"],
-    hdrs = ["library.hpp"],
+    srcs = ["Library.cpp"],
+    hdrs = ["Library.hpp"],
     deps = ["//src/Book:Book"],
     visibility = ["//visibility:public"]
 )

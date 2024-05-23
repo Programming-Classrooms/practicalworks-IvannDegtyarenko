@@ -1,4 +1,4 @@
-#include "author.hpp"
+#include "Author.hpp"
 
 Author::Author(std::string initSurename, std::string initName, std::string initFathername)
 {

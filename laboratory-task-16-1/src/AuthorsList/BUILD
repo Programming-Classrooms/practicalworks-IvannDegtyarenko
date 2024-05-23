@@ -1,7 +1,7 @@
 cc_library(
     name = "AuthorsList",
-    srcs = ["aList.cpp"],
-    hdrs = ["aList.hpp"],
+    srcs = ["AuthorList.cpp"],
+    hdrs = ["AuthorList.hpp"],
     deps = ["//src/Author:Author"],
     visibility = ["//visibility:public"]
 )

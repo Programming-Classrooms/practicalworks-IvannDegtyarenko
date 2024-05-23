@@ -1,6 +1,6 @@
 cc_library(
     name = "Author",
-    srcs = ["author.cpp"],
-    hdrs = ["author.hpp"],
+    srcs = ["Author.cpp"],
+    hdrs = ["Author.hpp"],
     visibility = ["//visibility:public"]
 )

@@ -1,17 +1,24 @@
-#include "book.hpp"
+#include "Book.hpp"
 
-Book::Book() : UDC(0), bookAuthors(AList()), bookTitle(""), yearOfPublish(2024)
+Book::Book() : UDC(0), bookAuthors(AuthorList()), bookTitle(""), yearOfPublish(2024)
 {}
 
 Book::Book(
     const size_t &initUDC,
-    const AList &initAuthors,
+    const AuthorList &initAuthors,
     const std::string &initTitle,
-    const size_t &initYear) : UDC(initUDC), bookAuthors(initAuthors), bookTitle(initTitle), yearOfPublish(initYear)
+    const size_t &initYear) : 
+    UDC(initUDC), 
+    bookAuthors(initAuthors), 
+    bookTitle(initTitle), 
+    yearOfPublish(initYear)
 {}
 
 Book::Book(const Book& src) :
-    UDC(src.UDC), bookAuthors(src.bookAuthors), bookTitle(src.bookTitle), yearOfPublish(src.yearOfPublish)
+    UDC(src.UDC), 
+    bookAuthors(src.bookAuthors),
+    bookTitle(src.bookTitle), 
+    yearOfPublish(src.yearOfPublish)
 {}
 
 size_t Book::getUDC() const
@@ -20,9 +27,9 @@ size_t Book::getUDC() const
     return safe;
 }
 
-AList Book::getAuthors() const
+AuthorList Book::getAuthors() const
 {
-    AList safe = this->bookAuthors;
+    AuthorList safe = this->bookAuthors;
     return safe;
 }
 
@@ -43,7 +50,7 @@ void Book::setUDC(const size_t& init)
     this->UDC = init;
 }
 
-void Book::setBookAuthors(const AList& init)
+void Book::setBookAuthors(const AuthorList& init)
 {
     this->bookAuthors = init;
 }
@@ -60,7 +67,10 @@ void Book::setYearOfPublish(const size_t& init)
 
 bool Book::operator==(const Book& rhs) const
 {
-    return this->UDC == rhs.UDC && this->bookAuthors == rhs.bookAuthors && this->bookTitle == rhs.bookTitle && this->yearOfPublish == rhs.yearOfPublish;
+    return this->UDC == rhs.UDC && 
+    this->bookAuthors == rhs.bookAuthors && 
+    this->bookTitle == rhs.bookTitle && 
+    this->yearOfPublish == rhs.yearOfPublish;
 }
 
 bool Book::operator<(const Book& rhs) const
@@ -84,7 +94,7 @@ void Book::clear()
     this->UDC = 0;
     this->bookAuthors = std::set<Author>();
     this->bookTitle = "";
-    this->yearOfPublish = 2024;
+    this->yearOfPublish = -1;
 }
 
 void Book::addAuthor(const Author& src)

@@ -1,29 +1,29 @@
 #ifndef BOOK_HPP
 #define BOOK_HPP
 
-#include "../AuthorsList/aList.hpp"
+#include "../AuthorsList/AuthorList.hpp"
 #include <sstream>
 
 
 class Book {
 private:
     size_t UDC;
-    AList bookAuthors;
+    AuthorList bookAuthors;
     std::string bookTitle;
     size_t yearOfPublish;
 public:
     Book();
-    Book(const size_t&, const AList&, const std::string&, const size_t&);
+    Book(const size_t&, const AuthorList&, const std::string&, const size_t&);
     Book(const Book&);
     ~Book() = default;
 
     size_t getUDC() const;
-    AList getAuthors() const;
+    AuthorList getAuthors() const;
     std::string getBookTitle() const;
     size_t getYearOfPublish() const;
 
     void setUDC(const size_t&);
-    void setBookAuthors(const AList&);
+    void setBookAuthors(const AuthorList&);
     void setBookTitle(const std::string&);
     void setYearOfPublish(const size_t&);
 

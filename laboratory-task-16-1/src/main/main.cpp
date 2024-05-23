@@ -1,4 +1,4 @@
-#include "../Library/library.hpp"
+#include "../Library/Library.hpp"
 
 
 void checkFile(std::ifstream& file)

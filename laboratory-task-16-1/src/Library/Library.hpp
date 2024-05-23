@@ -3,10 +3,11 @@
 
 #include <map>
 #include <algorithm>
-#include "../Book/book.hpp"
 #include <stdexcept>
 #include <fstream>
 #include <typeinfo>
+
+#include "../Book/Book.hpp"
 
 
 class Library{
