@@ -1,7 +1,5 @@
 cc_binary(
     name = "cpp_app",
     srcs = ["main.cpp"],
-    deps = [
-        "//src/classFolder:classFolder",
-    ],
+    deps = ["//src/Matrix:Matrix", "//src/Fraction:Fraction"],
 )

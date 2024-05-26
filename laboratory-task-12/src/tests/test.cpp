@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include <stdexcept>
-#include "../classFolder/usualFraction.hpp"
-#include "../classFolder/matrix.hpp"
+
+#include "../Fraction/UsualFraction.hpp"
+#include "../Matrix/Matrix.hpp"
 
 
 //................FRACTION.............

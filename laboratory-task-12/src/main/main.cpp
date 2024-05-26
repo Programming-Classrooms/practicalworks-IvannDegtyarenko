@@ -1,5 +1,5 @@
-#include "../classFolder/UsualFraction.hpp"
-#include "../classFolder/Matrix.hpp"
+#include "../Fraction/UsualFraction.hpp"
+#include "../Matrix/Matrix.hpp"
 
 
 int main()
