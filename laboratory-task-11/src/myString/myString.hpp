@@ -1,10 +1,12 @@
 #ifndef MYSTRING_HPP
 #define MYSTRING_HPP
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <string>
 #include <iostream>
 #include <cstring>
 #include <cctype>
+
 
 class MyString
 {
@@ -29,11 +31,11 @@ public:
     MyString& operator=(const MyString& right);
     MyString& operator+=(const MyString& right);
 
-    bool operator==(const MyString&);
-    bool operator<(const MyString&);
+    bool operator==(const MyString&) const;
+    bool operator<(const MyString&) const;
     
     friend std::istream& operator>>(std::istream& in, MyString& right);
     friend std::ostream& operator<<(std::ostream& out, const MyString& right);
 };
 
-#endif
+#endif //MYSTRING_HPP

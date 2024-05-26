@@ -1,6 +1,8 @@
-#include "../myString/myString.hpp"
 #include <gtest/gtest.h>
 #include <stdexcept>
+
+#include "../myString/myString.hpp"
+
 
 TEST(testConstructors, testDefaultConstructor)
 {

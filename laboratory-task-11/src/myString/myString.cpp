@@ -1,8 +1,5 @@
 #include "myString.hpp"
-#include <iostream>
-#include <cstring>
-#include <cctype>
-#define _CRT_SECURE_NO_WARNINGS
+
 
 MyString::MyString() {
 	myString = nullptr;
@@ -98,7 +95,8 @@ void MyString::printString() const
 	std::cout << this->myString << '\n';
 }
 
-bool MyString::operator==(const MyString& string) {
+bool MyString::operator==(const MyString& string) const
+{
 	if (this->size != string.size) {
 		return false;
 	}
@@ -108,7 +106,7 @@ bool MyString::operator==(const MyString& string) {
 	return true;
 }
 
-bool MyString::operator<(const MyString& rhs)
+bool MyString::operator<(const MyString& rhs) const
 {
     if (this->size != rhs.size) {
 		return this->size < rhs.size;

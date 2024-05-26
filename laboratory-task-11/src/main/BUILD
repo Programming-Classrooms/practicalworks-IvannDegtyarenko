@@ -1,5 +1,3 @@
-## /home/ivan/bazel/bazel-project/src/main/BUILD
-
 cc_binary(
     name = "cpp_app",
     srcs = ["main.cpp"],
