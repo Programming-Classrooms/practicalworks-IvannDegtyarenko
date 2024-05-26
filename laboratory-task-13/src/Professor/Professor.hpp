@@ -1,6 +1,8 @@
 #ifndef PROFESSOR_HPP
 #define PROFESSOR_HPP
-#include "person.hpp"
+
+#include "../Person/Person.hpp"
+
 
 class Professor final : public Person 
 {

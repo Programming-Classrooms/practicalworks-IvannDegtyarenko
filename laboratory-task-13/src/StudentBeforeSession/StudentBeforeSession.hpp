@@ -1,5 +1,6 @@
 #ifndef STUDENTBEFORESESSION_HPP
 #define STUDENTBEFORESESSION_HPP
+
 #include <iostream>
 #include <string>
 #include <typeinfo>

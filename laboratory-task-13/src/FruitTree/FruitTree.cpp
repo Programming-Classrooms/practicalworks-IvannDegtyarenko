@@ -1,4 +1,4 @@
-#include "fruitTree.hpp"
+#include "FruitTree.hpp"
 
 FruitTree::FruitTree(
 	std::string initTreeName,

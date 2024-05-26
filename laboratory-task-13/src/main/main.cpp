@@ -1,11 +1,10 @@
-#include "../classFolder/student.hpp"
-#include "../classFolder/professor.hpp"
-#include "../classFolder/studentBeforeSession.hpp"
-#include "../classFolder/studentAfterFirstSession.hpp"
-#include "../classFolder/studentAfterSecondSession.hpp"
-#include "../classFolder/treeContainer.hpp"
 #include <iomanip>
 #include <fstream>
+
+#include "../TreesContainer/TreeContainer.hpp"
+#include "../Professor/Professor.hpp"
+#include "../Student/Student.hpp"
+#include "../StudentSecondSession/StudentSecondSession.hpp"
 
 
 bool checkFile(std::ifstream& file, std::string path)
@@ -54,10 +53,10 @@ int main()
 //.................STUDENT_SESSION........
 
 		std::cout << '\n';
-		StudentAfterFirstSession obj1("Ber", 4, 6552, 52334324);
+		StudentFirstSession obj1("Ber", 4, 6552, 52334324);
 		obj1.print(std::cout);
 		std::cout << '\n' << obj1.getAverageMark() << '\n';
-		StudentAfterSecondSession obj2("Red", 3, 4332, 98644);
+		StudentSecondSession obj2("Red", 3, 4332, 98644);
 		obj2.print(std::cout);
 		std::cout << "Average mark after a year: " << std::setprecision(3) << obj2.getAverageMark() << '\n';
 

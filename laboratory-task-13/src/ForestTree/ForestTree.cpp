@@ -1,4 +1,4 @@
-#include "forestTree.hpp"
+#include "ForestTree.hpp"
 
 
 ForestTree::ForestTree(

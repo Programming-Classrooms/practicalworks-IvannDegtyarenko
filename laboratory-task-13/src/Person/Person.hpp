@@ -1,8 +1,10 @@
 #ifndef PERSON_HPP
 #define PERSON_HPP
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <iostream>
 #include <cstring>
+
 
 class Person {
 protected:

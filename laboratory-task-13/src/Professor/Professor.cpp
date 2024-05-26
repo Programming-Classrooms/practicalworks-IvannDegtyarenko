@@ -1,4 +1,4 @@
-#include "professor.hpp"
+#include "Professor.hpp"
 
 
 Professor::Professor() : Person("Professor's Name")

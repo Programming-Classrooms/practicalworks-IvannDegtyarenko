@@ -1,10 +1,12 @@
 #ifndef TREECONTAINER_HPP
 #define TREECONTAINER_HPP
-#include "tree.hpp"
-#include "forestTree.hpp"
-#include "fruitTree.hpp"
+
 #include <vector>
 #include <algorithm>
+
+#include "../ForestTree/ForestTree.hpp"
+#include "../FruitTree/FruitTree.hpp"
+
 
 class TreesContainer final : public Tree
 {

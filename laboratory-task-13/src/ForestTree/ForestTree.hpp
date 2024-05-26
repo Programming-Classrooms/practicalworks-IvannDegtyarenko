@@ -1,6 +1,7 @@
 #ifndef FORESTTREE_HPP
 #define FORESTTREE_HPP
-#include "tree.hpp"
+
+#include "../Tree/Tree.hpp"
 
 
 class ForestTree final : public Tree

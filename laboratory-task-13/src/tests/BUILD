@@ -3,6 +3,9 @@ cc_test(
     srcs = ["test.cpp"],
     deps = [
         "@googletest//:gtest_main",
-        "//src/classFolder:classFolder",
+        "//src/TreesContainer:TreesContainer",
+        "//src/Professor:Professor",
+        "//src/Student:Student",
+        "//src/StudentSecondSession:StudentSecondSession"
     ]
 )

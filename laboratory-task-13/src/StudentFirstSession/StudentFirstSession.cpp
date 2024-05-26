@@ -1,9 +1,9 @@
-#include "studentAfterFirstSession.hpp"
+#include "StudentFirstSession.hpp"
 
 
-const size_t StudentAfterFirstSession::sizeForArr = 4;
+const size_t StudentFirstSession::sizeForArr = 4;
 
-StudentAfterFirstSession::StudentAfterFirstSession(
+StudentFirstSession::StudentFirstSession(
 	std::string initName, 
 	size_t initCourse, 
 	size_t initGroup, 
@@ -16,7 +16,7 @@ StudentAfterFirstSession::StudentAfterFirstSession(
 	}
 }
 
-StudentAfterFirstSession::StudentAfterFirstSession(const StudentAfterFirstSession& init, size_t initBook): StudentBeforeSession(init, initBook)
+StudentFirstSession::StudentFirstSession(const StudentFirstSession& init, size_t initBook): StudentBeforeSession(init, initBook)
 {
 	this->marksArr = new size_t[this->sizeForArr];
 	for (size_t i = 0; i < this->sizeForArr; ++i) {
@@ -24,12 +24,12 @@ StudentAfterFirstSession::StudentAfterFirstSession(const StudentAfterFirstSessio
 	}
 }
 
-StudentAfterFirstSession::~StudentAfterFirstSession()
+StudentFirstSession::~StudentFirstSession()
 {
 	delete[] marksArr;
 }
 
-size_t& StudentAfterFirstSession::operator[](int index)
+size_t& StudentFirstSession::operator[](int index)
 {
 	if (index < 0 || index >= this->sizeForArr) {
 		throw std::invalid_argument("Wrong input!");
@@ -37,14 +37,14 @@ size_t& StudentAfterFirstSession::operator[](int index)
 	return marksArr[index];
 }
 
-void StudentAfterFirstSession::getMarks() const
+void StudentFirstSession::getMarks() const
 {
 	for (size_t i = 0; i < this->sizeForArr; ++i) {
 		std::cout << this->marksArr[i] << " ";
 	}
 }
 
-void StudentAfterFirstSession::changeMark(const int& index, const int& mark)
+void StudentFirstSession::changeMark(const int& index, const int& mark)
 {
 	if (index < 0 || index >= this->sizeForArr) {
 		throw std::invalid_argument("Wrong input!");
@@ -55,7 +55,7 @@ void StudentAfterFirstSession::changeMark(const int& index, const int& mark)
 	this->marksArr[index] = mark;
 }
 
-double StudentAfterFirstSession::getAverageMark()
+double StudentFirstSession::getAverageMark()
 {
 	double averageMark = 0.0;
 	for (size_t i = 0; i < this->sizeForArr; ++i) {
@@ -65,13 +65,13 @@ double StudentAfterFirstSession::getAverageMark()
 	return averageMark;
 }
 
-void StudentAfterFirstSession::print(std::ostream& out) const
+void StudentFirstSession::print(std::ostream& out) const
 {
 	StudentBeforeSession::print(out);
 	out << *this;
 }
 
-std::ostream& operator<<(std::ostream& out, const StudentAfterFirstSession& rhs)
+std::ostream& operator<<(std::ostream& out, const StudentFirstSession& rhs)
 {
 	out << "After 1st session Student has marks: ";
 	rhs.getMarks();

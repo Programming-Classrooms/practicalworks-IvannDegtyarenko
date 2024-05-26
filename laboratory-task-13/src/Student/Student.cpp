@@ -1,4 +1,4 @@
-#include "student.hpp"
+#include "Student.hpp"
 
 
 Student::Student(): Person("Student's Name"), course(1), group(7121)

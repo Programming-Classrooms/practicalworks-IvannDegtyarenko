@@ -1,6 +1,8 @@
 #ifndef STUDENT_HPP
 #define STUDENT_HPP
-#include "person.hpp"
+
+#include "../Person/Person.hpp"
+
 
 class Student final : public Person
 {

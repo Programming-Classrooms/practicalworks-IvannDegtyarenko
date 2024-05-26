@@ -1,6 +1,7 @@
 #ifndef FRUITTREE_HPP
 #define FRUITTREE_HPP
-#include "tree.hpp"
+
+#include "../Tree/Tree.hpp"
 
 
 class FruitTree final : public Tree

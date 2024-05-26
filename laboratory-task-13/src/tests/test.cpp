@@ -1,12 +1,10 @@
 #include <stdexcept>
 #include <gtest/gtest.h>
-#include "../classFolder/person.hpp"
-#include "../classFolder/student.hpp"
-#include "../classFolder/professor.hpp"
-#include "../classFolder/studentBeforeSession.hpp"
-#include "../classFolder/studentAfterFirstSession.hpp"
-#include "../classFolder/studentAfterSecondSession.hpp"
-#include "../classFolder/treeContainer.hpp"
+
+#include "../TreesContainer/TreeContainer.hpp"
+#include "../Professor/Professor.hpp"
+#include "../Student/Student.hpp"
+#include "../StudentSecondSession/StudentSecondSession.hpp"
 
 
 //.................STUDENT_PROFESSOR...........
@@ -189,9 +187,9 @@ TEST(testStudentBeforeSessionSetters, testCourseSetter)
 
 TEST(testSudentFirstSessionConstructor, testParameterConstructor)
 {
-    EXPECT_THROW(StudentAfterFirstSession ("", 4, 56, 7656), std::invalid_argument);
-    EXPECT_THROW(StudentAfterFirstSession ("TEST", 65, 56, 7656), std::logic_error);
-    StudentAfterFirstSession test("TEST", 4, 654, 333);
+    EXPECT_THROW(StudentFirstSession ("", 4, 56, 7656), std::invalid_argument);
+    EXPECT_THROW(StudentFirstSession ("TEST", 65, 56, 7656), std::logic_error);
+    StudentFirstSession test("TEST", 4, 654, 333);
     EXPECT_EQ(test.getName(), "TEST");
     EXPECT_EQ(test.getCourse(), 4);
     EXPECT_EQ(test.getGroup(), 654);
@@ -200,7 +198,7 @@ TEST(testSudentFirstSessionConstructor, testParameterConstructor)
 
 TEST(testSudentFirstSessionConstructor, testCopyConstructor)
 {
-    StudentAfterFirstSession test1("TEST", 2, 768, 777), test2(test1, 696);
+    StudentFirstSession test1("TEST", 2, 768, 777), test2(test1, 696);
     EXPECT_EQ(test2.getName(), "TEST");
     EXPECT_EQ(test2.getCourse(), 2);
     EXPECT_EQ(test2.getGroup(), 768);
@@ -210,7 +208,7 @@ TEST(testSudentFirstSessionConstructor, testCopyConstructor)
 
 TEST(testStudentFirstSessionMethods, testMarksWork)
 {
-    StudentAfterFirstSession test("TEST", 1, 7554, 5425);
+    StudentFirstSession test("TEST", 1, 7554, 5425);
     EXPECT_THROW(test[8], std::invalid_argument);
     EXPECT_THROW(test.changeMark(8, 5), std::invalid_argument);
     EXPECT_THROW(test.changeMark(3, 15), std::invalid_argument);
