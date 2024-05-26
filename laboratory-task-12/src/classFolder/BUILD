@@ -1,12 +1,12 @@
 cc_library(
     name = "classFolder",
     srcs = [
-        "usualFraction.cpp",
-        "matrix.cpp"
+        "UsualFraction.cpp",
+        "Matrix.cpp"
     ],
     hdrs = [
-        "usualFraction.hpp",
-        "matrix.hpp"
+        "UsualFraction.hpp",
+        "Matrix.hpp"
     ],
     visibility = ["//visibility:public"],
 )

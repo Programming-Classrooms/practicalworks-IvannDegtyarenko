@@ -1,4 +1,4 @@
-#include "usualFraction.hpp"
+#include "UsualFraction.hpp"
 
 
 UsualFraction::UsualFraction(int initN, int initD) : numerator(initN), denominator(initD)
