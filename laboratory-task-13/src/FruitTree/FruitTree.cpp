@@ -8,9 +8,17 @@ FruitTree::FruitTree(
 	size_t initStorageDuration
 ) :
 	Tree(initTreeName, initTreeAge, initTreeType),
-	cropMass(initCropMass),
 	storageDuration(initStorageDuration)
-{}
+{
+	if (initCropMass < 0) {
+		throw std::invalid_argument("Wrong input Crop Mass Fruit Tree");
+	}
+	this->cropMass = initCropMass;
+	if (initStorageDuration < 0) {
+		throw std::invalid_argument("Wrong input Storage Duration Fruit Tree");
+	}
+	this->storageDuration = initStorageDuration;
+}
 
 FruitTree::FruitTree(const FruitTree& init):
 	Tree(init), cropMass(init.cropMass), storageDuration(init.storageDuration)

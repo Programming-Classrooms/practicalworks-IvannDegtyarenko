@@ -6,8 +6,13 @@ ForestTree::ForestTree(
 	size_t initTreeAge, 
 	treeTypes initTreeType, 
 	double initWoodAmount
-): Tree(initTreeName, initTreeAge, initTreeType), woodAmount(initWoodAmount)
-{}
+): Tree(initTreeName, initTreeAge, initTreeType)
+{
+	if (initWoodAmount < 0) {
+		throw std::invalid_argument("Wrong input Wood Amount Forest Tree");
+	}
+	this->woodAmount = initWoodAmount;
+}
 
 ForestTree::ForestTree(const ForestTree& init) :
 	Tree(init), woodAmount(init.woodAmount)
