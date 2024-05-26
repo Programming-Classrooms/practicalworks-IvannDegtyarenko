@@ -1,8 +1,10 @@
 #include <stdexcept>
 #include <gtest/gtest.h>
 
+#include "../functions/functions.hpp"
 
-TEST(testCase, testName) 
+
+TEST(test, test)
 {
     EXPECT_EQ(1, 1);
 }

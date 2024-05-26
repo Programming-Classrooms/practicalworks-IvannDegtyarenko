@@ -8,6 +8,7 @@
 #include <stdexcept>
 #include <typeinfo>
 #include <algorithm>
+#include <strstream>
 
 
 void fillLakeWithFishes(std::set<std::string>&);

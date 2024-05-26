@@ -13,7 +13,7 @@ void checkFile(std::ifstream& file)
     }
 }
 
-void readWords(std::ifstream& fin, std::map<std::string, size_t>& allWords)
+void readWords(std::istream& fin, std::map<std::string, size_t>& allWords)
 {
 	std::string line = "";
 	std::string delimeters = "!@#$%^&*()-_    =+/.<>,:;{}[]|";

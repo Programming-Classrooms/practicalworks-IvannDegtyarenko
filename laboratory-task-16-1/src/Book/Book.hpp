@@ -1,8 +1,9 @@
 #ifndef BOOK_HPP
 #define BOOK_HPP
 
-#include "../AuthorsList/AuthorList.hpp"
 #include <sstream>
+
+#include "../AuthorsList/AuthorList.hpp"
 
 
 class Book {

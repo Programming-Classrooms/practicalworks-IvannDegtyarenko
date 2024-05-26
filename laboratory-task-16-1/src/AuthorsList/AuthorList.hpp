@@ -2,6 +2,7 @@
 #define AUTHORLIST_HPP
 
 #include <set>
+
 #include "../Author/Author.hpp"
 
 
